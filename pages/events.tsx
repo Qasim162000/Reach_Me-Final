@@ -3,7 +3,15 @@ import { useRouter } from "next/router";
 import EventsContext from "../components/context/events/EventsContext";
 import EventItem from "../components/EventItem";
 import { app, auth } from "../firebase/firebase";
-import { getFirestore, collection, query, where, getDocs, deleteDoc, doc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 
 interface Event {
@@ -39,7 +47,7 @@ const Events: React.FC<EventsProps> = ({}) => {
 
     const events: Event[] = [];
     querySnapshot.forEach((doc) => {
-      events.push({ ...(doc.data() as Omit<Event, 'id'>), id: doc.id });
+      events.push({ ...(doc.data() as Omit<Event, "id">), id: doc.id });
     });
 
     setEvent(events);
@@ -50,7 +58,10 @@ const Events: React.FC<EventsProps> = ({}) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         fetchUserEvents(user.uid);
-        if (user.email === superAdminEmail && user.displayName === superAdminUsername) {
+        if (
+          user.email === superAdminEmail &&
+          user.displayName === superAdminUsername
+        ) {
           setIsAdmin(true);
         }
       } else {
@@ -92,28 +103,31 @@ const Events: React.FC<EventsProps> = ({}) => {
           {loading ? (
             <p>Loading...</p>
           ) : event.length === 0 ? (
-            <p>No event found</p>
+            <h1 className="text-2xl mt-4 text-center font-bold">
+              No Events Found.
+            </h1>
           ) : (
             event.map((item: Event, index: number) => {
               return (
-                <EventItem              key={index}
-                image={item.image}
-                title={item.title}
-                organizers={item.organizers}
-                place={item.place}
-                description={item.description}
-                date={item.date}
-                time={item.time}
-                id={item.id}
-                onDelete={isAdmin ? handleDelete : undefined}
-              />
-            );
-          })
-        )}
+                <EventItem
+                  key={index}
+                  image={item.image}
+                  title={item.title}
+                  organizers={item.organizers}
+                  place={item.place}
+                  description={item.description}
+                  date={item.date}
+                  time={item.time}
+                  id={item.id}
+                  onDelete={isAdmin ? handleDelete : undefined}
+                />
+              );
+            })
+          )}
+        </div>
       </div>
-    </div>
-  </>
-);
+    </>
+  );
 };
 
-export default Events;  
+export default Events;

@@ -1,12 +1,18 @@
-
 import FreelancingItem from "../components/FreelancingItem";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, firestore } from "../firebase/firebase";
-import { collection, query, where, onSnapshot, deleteDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import { useRouter } from "next/router";
 
-interface FreelancingProps { }
+interface FreelancingProps {}
 
 interface Project {
   id: string;
@@ -19,7 +25,7 @@ interface Project {
   userId: string | null | undefined;
 }
 
-const Freelancing: React.FC<FreelancingProps> = ({ }) => {
+const Freelancing: React.FC<FreelancingProps> = ({}) => {
   const router = useRouter();
 
   const [user] = useAuthState(auth);
@@ -35,10 +41,13 @@ const Freelancing: React.FC<FreelancingProps> = ({ }) => {
           where("userId", "==", user.uid)
         );
         const unsubscribe = onSnapshot(userProjectsQuery, (querySnapshot) => {
-          const fetchedProjects: Project[] = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }) as Project);
+          const fetchedProjects: Project[] = querySnapshot.docs.map(
+            (doc) =>
+              ({
+                id: doc.id,
+                ...doc.data(),
+              } as Project)
+          );
           setProjects(fetchedProjects);
           setLoading(false);
         });
@@ -57,7 +66,6 @@ const Freelancing: React.FC<FreelancingProps> = ({ }) => {
     await deleteDoc(doc(firestore, "freelancingProjects", projectId));
     setProjects(projects.filter((project) => project.id !== projectId));
   };
-  
 
   return (
     <>
@@ -69,32 +77,30 @@ const Freelancing: React.FC<FreelancingProps> = ({ }) => {
         >
           Add a New Project
         </button>
-        {
-          loading ? (
-            <div>Loading...</div>
-          ) : (
-            projects.length > 0 ? (
-              <div className="flex grid grid-cols-1 my-3 xl:mx-80 mx-10">
-                {projects?.map((item: any, index: any) => {
-                  return (
-                    <FreelancingItem
-                      key={index}
-                      date={item.date}
-                      niche={item.niche}
-                      title={item.title}
-                      description={item.description}
-                      email={item.email}
-                      user={item.user}
-                      onDelete={() => deleteProject(item.id)}
-                    />
-                  );
-                })}
-              </div>
-            ) : (
-              <p>There's no project</p>
-            )
-          )
-        }
+        {loading ? (
+          <div>Loading...</div>
+        ) : projects.length > 0 ? (
+          <div className="flex grid grid-cols-1 my-3 xl:mx-80 mx-10">
+            {projects?.map((item: any, index: any) => {
+              return (
+                <FreelancingItem
+                  key={index}
+                  date={item.date}
+                  niche={item.niche}
+                  title={item.title}
+                  description={item.description}
+                  email={item.email}
+                  user={item.user}
+                  onDelete={() => deleteProject(item.id)}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <h1 className="text-2xl mt-4 text-center font-bold">
+            No projects found.
+          </h1>
+        )}
       </div>
     </>
   );

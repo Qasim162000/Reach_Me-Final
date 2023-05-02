@@ -14,18 +14,17 @@ const AnnouncementItem: React.FC<AnnouncementItemProps> = (props) => {
 
   return (
     <>
-      <div className="relative text-center mx-auto justify-center w-[10%] h-[22px]">
-        <Image
-          src={props.src}
-          alt="card-image"
-          className="text-center mx-auto justify-center"
-          height='100px'
-          width='100px'
-        />
-      </div>
-      <div
-        className="w-auto rounded-lg overflow-hidden shadow-lg mt-20 mx-6 bg-black dark:bg-white"
-      >
+      <div className="w-[70%] justify-center mx-auto rounded-lg overflow-hidden shadow-lg mt-4 bg-black dark:bg-white">
+        <div className="pt-6">
+          <Image
+            src={props.src}
+            alt="card-image"
+            className="text-center mx-auto justify-center rounded-full"
+            height="250px"
+            width="250px"
+          />
+        </div>
+
         <div className="px-6 py-4">
           <div className="font-bold text-white dark:text-black text-xl mb-2">
             {props.title}
@@ -33,16 +32,17 @@ const AnnouncementItem: React.FC<AnnouncementItemProps> = (props) => {
           <p className="text-white dark:text-black text-base">
             {props.description}
           </p>
+
+          {onDelete && ( // Conditionally render the Delete button
+            <button
+              onClick={() => onDelete(id, src)}
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-3"
+            >
+              Delete
+            </button>
+          )}
         </div>
       </div>
-      {onDelete && ( // Conditionally render the Delete button
-        <button
-          onClick={() => onDelete(id, src)}
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-3"
-        >
-          Delete
-        </button>
-      )}
     </>
   );
 };

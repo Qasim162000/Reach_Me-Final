@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { collection, query, where, getDocs, deleteDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import { firestore, auth } from "../firebase/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -15,9 +22,9 @@ interface Project {
   gallery: string;
 }
 
-interface ProjectsProps { }
+interface ProjectsProps {}
 
-const Projects: React.FC<ProjectsProps> = ({ }) => {
+const Projects: React.FC<ProjectsProps> = ({}) => {
   const router = useRouter();
   const [user] = useAuthState(auth);
   const [projects, setProjects] = useState<Project[]>([]);
@@ -48,7 +55,6 @@ const Projects: React.FC<ProjectsProps> = ({ }) => {
     setProjects(projects.filter((project) => project.id !== projectId));
   };
 
-
   return (
     <>
       <div className="w-full pt-16 px-2 mx-auto mt-12 text-center">
@@ -59,9 +65,6 @@ const Projects: React.FC<ProjectsProps> = ({ }) => {
         >
           Add a New Project
         </button>
-        <h1 className="text-2xl mt-8 text-center font-bold">
-          Show existing projects underneath
-        </h1>
         {loading ? (
           <div className="text-gray-700 text-center my-4">Loading...</div>
         ) : (
@@ -88,14 +91,13 @@ const Projects: React.FC<ProjectsProps> = ({ }) => {
                     >
                       Delete
                     </button>
-
                   </div>
                 </div>
               ))
             ) : (
-              <div className="text-gray-700 text-center my-4">
+              <h1 className="text-2xl mt-8 text-center font-bold">
                 No projects found.
-              </div>
+              </h1>
             )}
           </div>
         )}

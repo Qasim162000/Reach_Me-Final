@@ -45,6 +45,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
 
   const logout = async () => {
     await signOut(auth);
+    setIsOpen(!isOpen);
   };
 
   const handleChangePage = () => {
@@ -54,6 +55,11 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
         userName: user?.displayName,
       },
     });
+    setIsOpen(!isOpen);
+  };
+  const handleNavigation = (data: any) => {
+    router.push(`/${data.url}`);
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -121,7 +127,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
               <li
                 className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 cursor-pointer mx-2"
                 key={index}
-                onClick={() => router.push(`/${data.url}`)}
+                onClick={() => handleNavigation(data)}
               >
                 <img
                   src={data.image}
