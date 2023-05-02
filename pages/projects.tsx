@@ -1,0 +1,107 @@
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { collection, query, where, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { firestore, auth } from "../firebase/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+
+interface Project {
+  id: string;
+  userId: string;
+  youtubeVideoLink: string;
+  title: string;
+  techs: string;
+  department: string;
+  description: string;
+  gallery: string;
+}
+
+interface ProjectsProps { }
+
+const Projects: React.FC<ProjectsProps> = ({ }) => {
+  const router = useRouter();
+  const [user] = useAuthState(auth);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const q = query(
+        collection(firestore, "projects"),
+        where("userId", "==", user?.uid)
+      );
+      const querySnapshot = await getDocs(q);
+      const projectsData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Project[];
+      setProjects(projectsData);
+      setLoading(false);
+    };
+
+    if (user) {
+      fetchProjects();
+    }
+  }, [user]);
+
+  const deleteProject = async (projectId: string) => {
+    await deleteDoc(doc(firestore, "projects", projectId));
+    setProjects(projects.filter((project) => project.id !== projectId));
+  };
+
+
+  return (
+    <>
+      <div className="w-full pt-16 px-2 mx-auto mt-12 text-center">
+        <button
+          onClick={() => router.push("/projectentry")}
+          type="button"
+          className="animate-pulse bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-10 mt-4"
+        >
+          Add a New Project
+        </button>
+        <h1 className="text-2xl mt-8 text-center font-bold">
+          Show existing projects underneath
+        </h1>
+        {loading ? (
+          <div className="text-gray-700 text-center my-4">Loading...</div>
+        ) : (
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4 px-4">
+            {projects.length > 0 ? (
+              projects.map((project) => (
+                <div
+                  key={project.id}
+                  className="bg-white rounded-lg shadow-lg overflow-hidden"
+                >
+                  <img
+                    className="h-48 w-full object-cover"
+                    src={project.gallery}
+                    alt="Project gallery"
+                  />
+                  <div className="p-4">
+                    <h3 className="font-bold text-gray-800">{project.title}</h3>
+                    <p className="text-gray-600">{project.description}</p>
+                    {/* Render other project details as needed */}
+                    <button
+                      onClick={() => deleteProject(project.id)}
+                      type="button"
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded h-6 mt-2"
+                    >
+                      Delete
+                    </button>
+
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="text-gray-700 text-center my-4">
+                No projects found.
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
+export default Projects;
