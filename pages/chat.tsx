@@ -17,6 +17,7 @@ import LoopIcon from "@mui/icons-material/Loop";
 import Image from "next/image";
 import ComsatsLogo from "../components/assets/comsats-logo.png";
 import DummyDisplayPic from "../components/assets/DummyDisplayPic.jpg";
+import LeftMenu from "../components/LeftMenu";
 
 type ChatProps = {};
 
@@ -60,8 +61,9 @@ const Chat: React.FC<ChatProps> = () => {
 
   return (
     <>
-      <div className="w-full lg:w-[75%] pt-16 px-2 mx-auto mt-4">
-        <div className="flex flex-col flex-grow w-full max-w-xl bg-white shadow-xl rounded-lg overflow-hidden dark:bg-[#28282B] xl:ml-[350px] md:ml-[150px] sm:ml-[70px]">
+      <LeftMenu />
+      <div className="w-full lg:w-[80%] xl:w-[70%] pt-16 px-2 mx-auto mt-4">
+        <div className="mt-[20px] flex flex-col flex-grow w-full max-w-xl bg-white shadow-xl rounded-lg overflow-hidden dark:bg-[#28282B] xl:ml-[350px] md:ml-[150px] sm:ml-[70px]">
           <div className="flex px-8 py-2.5 justify-between">
             <div className="flex justify-start">
               <div className="w-10 h-10 mr-5">
@@ -77,7 +79,7 @@ const Chat: React.FC<ChatProps> = () => {
               </p>
             </div>
           </div>
-          <div className="flex flex-col flex-grow h-full p-4 overflow-y-auto hover:scrollbar-thin overflow-x-hidden hover:scrollbar-thumb-black scrollbar-hide hover:scrollbar-default dark:bg-[#28282B] dark:border-none">
+          <div className="flex flex-col flex-grow h-[400px] p-4 overflow-y-auto hover:scrollbar-thin overflow-x-hidden hover:scrollbar-thumb-black scrollbar-hide hover:scrollbar-default dark:bg-[#28282B] dark:border-none">
             {meassage.map((data) => (
               <div key={data.id}>
                 {data.data().userid === user?.uid ? (

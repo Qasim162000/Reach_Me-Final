@@ -30,17 +30,16 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
       credentials.email,
       credentials.password
     )
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         const user = userCredential.user;
         updateProfile(userCredential.user, {
           displayName: credentials.displayName,
         });
-        router.push("/auth/loginwithemail");
+        await router.push("/");
+        window.location.reload();
       })
       .catch((error) => {
         alert("Email Already in use");
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
       });
     setCredentials({
       displayName: "",

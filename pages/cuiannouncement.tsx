@@ -3,8 +3,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, storage } from "../firebase/firebase";
 import AnnouncementContext from "../components/context/announcements/AnnouncementContext";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import LeftMenu from "../components/LeftMenu";
 
-interface CUIAnnouncementProps { }
+interface CUIAnnouncementProps {}
 
 interface FormDetails {
   title: string;
@@ -12,7 +13,7 @@ interface FormDetails {
   src: File | string;
 }
 
-const CUIAnnouncement: React.FC<CUIAnnouncementProps> = ({ }) => {
+const CUIAnnouncement: React.FC<CUIAnnouncementProps> = ({}) => {
   const [formDetails, setFormDetails] = useState<FormDetails>({
     title: "",
     description: "",
@@ -22,7 +23,7 @@ const CUIAnnouncement: React.FC<CUIAnnouncementProps> = ({ }) => {
   const [user] = useAuthState(auth);
   const [statusMessage, setStatusMessage] = useState<string>("");
   const { addAnnouncement } = useContext(AnnouncementContext);
-  const [processing, setProcessing] = useState(false)
+  const [processing, setProcessing] = useState(false);
   const FormSubmitHandler = async (E: FormEvent) => {
     E.preventDefault();
     setProcessing(true);
@@ -31,7 +32,7 @@ const CUIAnnouncement: React.FC<CUIAnnouncementProps> = ({ }) => {
       alert("User not authenticated.");
       return;
     }
-    
+
     // setStatusMessage("Uploading image...");
 
     if (formDetails.src) {
@@ -69,7 +70,6 @@ const CUIAnnouncement: React.FC<CUIAnnouncementProps> = ({ }) => {
       alert("Please select an image.");
       setProcessing(false);
     }
-
   };
 
   const onImageChange = (E: ChangeEvent<HTMLInputElement>) => {
@@ -84,7 +84,8 @@ const CUIAnnouncement: React.FC<CUIAnnouncementProps> = ({ }) => {
 
   return (
     <>
-      <div className="w-full pt-16 px-2 mx-auto mt-12">
+      <LeftMenu />
+      <div className="w-full lg:w-[80%] xl:w-[70%] pt-16 px-2 mx-auto mt-4">
         <form
           method="post"
           onSubmit={FormSubmitHandler}

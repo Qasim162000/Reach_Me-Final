@@ -1,12 +1,17 @@
 import React, { useContext, useState } from "react";
 import EventsContext from "../components/context/events/EventsContext";
-import { firestore, auth, storage as firebaseStorage } from "../firebase/firebase";
+import {
+  firestore,
+  auth,
+  storage as firebaseStorage,
+} from "../firebase/firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore";
+import LeftMenu from "../components/LeftMenu";
 
-interface NewEventProps { }
+interface NewEventProps {}
 
-const NewEvent: React.FC<NewEventProps> = ({ }) => {
+const NewEvent: React.FC<NewEventProps> = ({}) => {
   const [formDetails, setFormDetails] = useState({
     image: "",
     title: "",
@@ -22,7 +27,9 @@ const NewEvent: React.FC<NewEventProps> = ({ }) => {
 
   const { addEvent, createEvent } = useContext(EventsContext);
 
-  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (event.target.files && event.target.files[0]) {
       setIsUploading(true);
       const file = event.target.files[0];
@@ -37,27 +44,27 @@ const NewEvent: React.FC<NewEventProps> = ({ }) => {
 
   const FormSubmitHandler = async (E: any) => {
     E.preventDefault();
-  
+
     if (isUploading) {
       alert("Please wait for the image to finish uploading.");
       return;
     }
-  
+
     // Check if the image has been uploaded
     if (formDetails.image === "") {
       alert("Please upload an image before adding an event.");
       return;
     }
-  
+
     setIsSubmitting(true);
-  
+
     const userId = auth.currentUser?.uid;
     if (!userId) {
       alert("User not logged in. Please log in before adding an event.");
       setIsSubmitting(false);
       return;
     }
-  
+
     const eventData = {
       userId, // add userId to eventData
       image: formDetails.image,
@@ -69,7 +76,7 @@ const NewEvent: React.FC<NewEventProps> = ({ }) => {
       time: formDetails.time,
       createdAt: new Date(),
     };
-  
+
     try {
       const result = await createEvent(eventData);
       if (result.success) {
@@ -90,7 +97,7 @@ const NewEvent: React.FC<NewEventProps> = ({ }) => {
       console.error("Error adding event: ", error);
       alert("Failed to add event. Please try again.");
     }
-  
+
     setFormDetails({
       image: "",
       title: "",
@@ -108,7 +115,8 @@ const NewEvent: React.FC<NewEventProps> = ({ }) => {
   };
   return (
     <>
-      <div className="w-full pt-16 px-2 mx-auto mt-12">
+      <LeftMenu />
+      <div className="w-full lg:w-[80%] xl:w-[70%] pt-16 px-2 mx-auto mt-4">
         <form
           method="post"
           onSubmit={FormSubmitHandler}
@@ -196,20 +204,22 @@ const NewEvent: React.FC<NewEventProps> = ({ }) => {
               onChange={handleImageUpload}
               className="mt-1 mb-5"
             />
-
           </div>
           <button
             type="submit"
             disabled={isUploading || isSubmitting}
-            className={`w-24 ${isUploading || isSubmitting
+            className={`w-24 ${
+              isUploading || isSubmitting
                 ? "bg-gray-500"
                 : "bg-blue-500 hover:bg-blue-700"
-              } text-white font-bold py-2 px-4 rounded ml-2`}
+            } text-white font-bold py-2 px-4 rounded ml-2`}
           >
-            {isUploading ? "Uploading image..." : isSubmitting ? "Processing..." : "Post"}
+            {isUploading
+              ? "Uploading image..."
+              : isSubmitting
+              ? "Processing..."
+              : "Post"}
           </button>
-
-
         </form>
       </div>
     </>

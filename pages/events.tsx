@@ -13,6 +13,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import LeftMenu from "../components/LeftMenu";
 
 interface Event {
   id: string;
@@ -89,7 +90,8 @@ const Events: React.FC<EventsProps> = ({}) => {
 
   return (
     <>
-      <div className="w-full pt-16 px-2 mx-auto mt-12 text-center">
+      <LeftMenu />
+      <div className="w-full lg:w-[80%] xl:w-[70%] pt-16 px-2 mx-auto mt-4">
         {isAdmin && (
           <button
             onClick={() => router.push("/addnewevent")}

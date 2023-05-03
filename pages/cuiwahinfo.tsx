@@ -4,11 +4,13 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import AnnouncementContext from "../components/context/announcements/AnnouncementContext";
 import AnnouncementItem from "../components/AnnouncementItem";
 import { auth } from "../firebase/firebase";
+import LeftMenu from "../components/LeftMenu";
 
 interface CuiwahinfoProps {}
 
 const Cuiwahinfo: React.FC<CuiwahinfoProps> = ({}) => {
-  const { announcement, loading, deleteAnnouncement } = useContext(AnnouncementContext);
+  const { announcement, loading, deleteAnnouncement } =
+    useContext(AnnouncementContext);
   const router = useRouter();
   const [user] = useAuthState(auth);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -17,14 +19,19 @@ const Cuiwahinfo: React.FC<CuiwahinfoProps> = ({}) => {
   const superAdminUsername = "Layba";
 
   useEffect(() => {
-    if (user && user.email === superAdminEmail && user.displayName === superAdminUsername) {
+    if (
+      user &&
+      user.email === superAdminEmail &&
+      user.displayName === superAdminUsername
+    ) {
       setIsAdmin(true);
     }
   }, [user]);
 
   return (
     <>
-      <div className="w-full pt-16 px-2 mx-auto mt-12 text-center">
+      <LeftMenu />
+      <div className="w-full lg:w-[80%] xl:w-[70%] pt-16 px-2 mx-auto mt-4">
         {isAdmin && (
           <button
             onClick={() => router.push("/cuiannouncement")}

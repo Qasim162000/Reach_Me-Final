@@ -11,6 +11,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { useRouter } from "next/router";
+import LeftMenu from "../components/LeftMenu";
 
 interface FreelancingProps {}
 
@@ -69,6 +70,7 @@ const Freelancing: React.FC<FreelancingProps> = ({}) => {
 
   return (
     <>
+      <LeftMenu />
       <div className="w-full pt-16 px-2 mx-auto mt-12 text-center">
         <button
           onClick={() => router.push("/projectdetails")}

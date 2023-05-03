@@ -8,6 +8,7 @@ import Messenger from "../components/messenger/Messenger";
 import PostForm from "../components/PostForm";
 import NewNavbar from "../components/NewNavbar";
 import { auth } from "../firebase/firebase";
+import LeftMenu from "../components/LeftMenu";
 
 const Home: NextPage = () => {
   const [user] = useAuthState(auth);
@@ -56,6 +57,7 @@ const Home: NextPage = () => {
 
       <NewNavbar />
       <section className="flex justify-center h-screen overflow-y-scroll">
+        <LeftMenu />
         <div className="w-full lg:w-2/3 xl:w-2/5 pt-16 px-2">
           {isMessenger ? (
             <motion.div

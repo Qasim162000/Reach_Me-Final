@@ -45,6 +45,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
 
   const logout = async () => {
     await signOut(auth);
+    router.push("/auth/login");
     setIsOpen(!isOpen);
   };
 

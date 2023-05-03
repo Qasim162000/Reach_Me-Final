@@ -3,10 +3,11 @@ import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { firestore, storage, auth } from "../firebase/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import LeftMenu from "../components/LeftMenu";
 
-interface ProjectentryProps { }
+interface ProjectentryProps {}
 
-const Projectentry: React.FC<ProjectentryProps> = ({ }) => {
+const Projectentry: React.FC<ProjectentryProps> = ({}) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [user, loading, error] = useAuthState(auth);
 
@@ -25,7 +26,6 @@ const Projectentry: React.FC<ProjectentryProps> = ({ }) => {
     description: "",
     gallery: null,
   });
-
 
   const onChange = (e: any) => {
     if (e.target.name === "gallery") {
@@ -46,7 +46,10 @@ const Projectentry: React.FC<ProjectentryProps> = ({ }) => {
     setIsProcessing(true);
 
     // Upload image to Firebase Storage
-    const storageRef = ref(storage, `project_images/${formDetails.gallery.name}`);
+    const storageRef = ref(
+      storage,
+      `project_images/${formDetails.gallery.name}`
+    );
     await uploadBytes(storageRef, formDetails.gallery);
     const imageURL = await getDownloadURL(storageRef);
 
@@ -84,7 +87,8 @@ const Projectentry: React.FC<ProjectentryProps> = ({ }) => {
 
   return (
     <>
-      <div className="w-full pt-16 px-2 mx-auto mt-12">
+      <LeftMenu />
+      <div className="w-full lg:w-[80%] xl:w-[70%] pt-16 px-2 mx-auto mt-4">
         <form
           method="post"
           onSubmit={FormSubmitHandler}
@@ -102,7 +106,8 @@ const Projectentry: React.FC<ProjectentryProps> = ({ }) => {
               name="youtubeVideoLink"
               placeholder="Youtube Video URL here"
               className="text-black block border border-grey-light p-2 rounded mb-4 w-full mx-2"
-              required />
+              required
+            />
             <input
               type="text"
               value={formDetails.techs}
@@ -165,9 +170,7 @@ const Projectentry: React.FC<ProjectentryProps> = ({ }) => {
             Post
           </button>
           {isProcessing && (
-            <div className="text-gray-700 text-center my-4">
-              Processing...
-            </div>
+            <div className="text-gray-700 text-center my-4">Processing...</div>
           )}
         </form>
       </div>
@@ -175,4 +178,4 @@ const Projectentry: React.FC<ProjectentryProps> = ({ }) => {
   );
 };
 
-export default Projectentry;      
+export default Projectentry;

@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import { firestore, auth } from "../firebase/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import LeftMenu from "../components/LeftMenu";
 
 interface Project {
   id: string;
@@ -57,7 +58,8 @@ const Projects: React.FC<ProjectsProps> = ({}) => {
 
   return (
     <>
-      <div className="w-full pt-16 px-2 mx-auto mt-12 text-center">
+      <LeftMenu />
+      <div className="w-full lg:w-[80%] xl:w-[70%] pt-16 px-2 mx-auto mt-4 text-center">
         <button
           onClick={() => router.push("/projectentry")}
           type="button"
@@ -95,7 +97,7 @@ const Projects: React.FC<ProjectsProps> = ({}) => {
                 </div>
               ))
             ) : (
-              <h1 className="text-2xl mt-8 text-center font-bold">
+              <h1 className="text-2xl mt-8 mx-auto text-center font-bold lg:ml-[30px]">
                 No projects found.
               </h1>
             )}

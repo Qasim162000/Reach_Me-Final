@@ -14,7 +14,7 @@ const AnnouncementItem: React.FC<AnnouncementItemProps> = (props) => {
 
   return (
     <>
-      <div className="w-[70%] justify-center mx-auto rounded-lg overflow-hidden shadow-lg mt-4 bg-black dark:bg-white">
+      <div className="w-full justify-center mx-auto text-center rounded-lg overflow-hidden shadow-lg mt-4 bg-black dark:bg-white">
         <div className="pt-6">
           <Image
             src={props.src}

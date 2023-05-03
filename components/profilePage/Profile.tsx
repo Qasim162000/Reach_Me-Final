@@ -8,6 +8,7 @@ import ProfileFeed from "./ProfileFeed";
 import ProfileHeader from "./ProfileHeader";
 import { auth } from "../../firebase/firebase";
 import CustomPosts from "./CustomPosts";
+import LeftMenu from "../LeftMenu";
 
 type ProfileProps = {};
 
@@ -53,9 +54,10 @@ const Profile: React.FC<ProfileProps> = () => {
       <div className="mt-14 shadow bg-white h-screen dark:bg-[#18191a]">
         <ProfileHeader userData={userData} />
         <div>
+          <LeftMenu />
           <div className="bg-gray-100 dark:bg-[#18191a]">
             <div className="flex justify-center h-auto">
-              <div className="w-[80%]">
+              <div className="w-[50%]">
                 {isShow && <PostForm isShow={false} userData={userData} />}
                 <CustomPosts />
                 <ProfileFeed

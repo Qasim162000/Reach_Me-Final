@@ -3,10 +3,11 @@ import FreelancingContext from "../components/context/freelancing/FreelancingCon
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, firestore } from "../firebase/firebase";
 import { addDoc, collection } from "firebase/firestore";
+import LeftMenu from "../components/LeftMenu";
 
-interface ProjectDetailsProps { }
+interface ProjectDetailsProps {}
 
-const ProjectDetails: React.FC<ProjectDetailsProps> = ({ }) => {
+const ProjectDetails: React.FC<ProjectDetailsProps> = ({}) => {
   const [user] = useAuthState(auth);
   const [formStatus, setFormStatus] = useState({
     isLoading: false,
@@ -29,11 +30,21 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ }) => {
 
   const FormSubmitHandler = async (E: React.FormEvent<HTMLFormElement>) => {
     E.preventDefault();
-    setFormStatus({ isLoading: true, isSuccess: false, isError: false, errorMessage: "" });
+    setFormStatus({
+      isLoading: true,
+      isSuccess: false,
+      isError: false,
+      errorMessage: "",
+    });
 
     try {
       await addDoc(collection(firestore, "freelancingProjects"), formDetails);
-      setFormStatus({ isLoading: false, isSuccess: true, isError: false, errorMessage: "" });
+      setFormStatus({
+        isLoading: false,
+        isSuccess: true,
+        isError: false,
+        errorMessage: "",
+      });
       setFormDetails({
         date: "",
         niche: "",
@@ -46,14 +57,26 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ }) => {
     } catch (error) {
       console.error("Error adding project: ", error);
       if (error instanceof Error) {
-        setFormStatus({ isLoading: false, isSuccess: false, isError: true, errorMessage: error.message });
+        setFormStatus({
+          isLoading: false,
+          isSuccess: false,
+          isError: true,
+          errorMessage: error.message,
+        });
       } else {
-        setFormStatus({ isLoading: false, isSuccess: false, isError: true, errorMessage: "An unknown error occurred." });
+        setFormStatus({
+          isLoading: false,
+          isSuccess: false,
+          isError: true,
+          errorMessage: "An unknown error occurred.",
+        });
       }
     }
   };
 
-  const onChange = (E: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const onChange = (
+    E: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormDetails({ ...formDetails, [E.target.name]: E.target.value });
   };
 
@@ -65,7 +88,8 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ }) => {
 
   return (
     <>
-      <div className="w-full pt-16 px-2 mx-auto mt-12">
+      <LeftMenu />
+      <div className="w-full lg:w-[80%] xl:w-[70%] pt-16 px-2 mx-auto mt-4">
         <form
           method="post"
           onSubmit={FormSubmitHandler}
@@ -143,27 +167,35 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ }) => {
           >
             Post
           </button>
-        <div className="mt-6">
-        {
-          formStatus.isLoading &&
-          <div className="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
-            Processing...
+          <div className="mt-6">
+            {formStatus.isLoading && (
+              <div
+                className="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+                role="alert"
+              >
+                Processing...
+              </div>
+            )}
+            {formStatus.isSuccess && (
+              <div
+                className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                role="alert"
+              >
+                <span className="font-medium">Success: </span> Project added
+                successfully
+              </div>
+            )}
+            {formStatus.isError && (
+              <div
+                className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                role="alert"
+              >
+                <span className="font-medium">Error: </span>{" "}
+                {formStatus.errorMessage}
+              </div>
+            )}
           </div>
-        }
-        {
-          formStatus.isSuccess &&
-          <div className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-            <span className="font-medium">Success: </span> Project added successfully
-          </div>
-        }
-        {
-          formStatus.isError &&
-          <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-            <span className="font-medium">Error: </span> {formStatus.errorMessage}
-          </div>
-            }
-            </div>
-          </form>
+        </form>
       </div>
     </>
   );
