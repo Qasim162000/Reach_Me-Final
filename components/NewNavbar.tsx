@@ -108,10 +108,10 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
         }`}
       >
         {user && (
-          <div className="text-sm lg:flex-grow text-end">
+          <div className="text-sm lg:hidden text-end">
             <li
               onClick={handleChangePage}
-              className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 cursor-pointer mx-2"
+              className="block mt-4 text-white-200 mr-4 cursor-pointer mx-2"
             >
               <img
                 src={
@@ -126,7 +126,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
 
             {topData.map((data, index) => (
               <li
-                className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 cursor-pointer mx-2"
+                className="block mt-4 xl:hidden lg:mt-0 text-white-200 mr-4 cursor-pointer mx-2"
                 key={index}
                 onClick={() => handleNavigation(data)}
               >
@@ -141,7 +141,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
               </li>
             ))}
             <li
-              className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 cursor-pointer mx-2"
+              className="block mt-4 lg:hidden lg:mt-0 text-white-200 mr-4 cursor-pointer mx-2"
               onClick={() => logout()}
             >
               <img
@@ -154,7 +154,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
               </button>
             </li>
             {resolvedTheme === "dark" ? (
-              <li className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 cursor-pointer mx-2">
+              <li className="block mt-4 text-white-200 mr-4 cursor-pointer mx-2">
                 <motion.div
                   onClick={() =>
                     setTheme(resolvedTheme === "dark" ? "light" : "dark")
@@ -164,7 +164,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
                 </motion.div>
               </li>
             ) : (
-              <li className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 cursor-pointer mx-2">
+              <li className="block mt-4 text-white-200 mr-4 cursor-pointer mx-2">
                 <motion.div
                   onClick={() =>
                     setTheme(resolvedTheme === "dark" ? "light" : "dark")
@@ -180,7 +180,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
           <>
             <div className="text-sm lg:flex-grow text-end">
               <li
-                className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 cursor-pointer mx-2"
+                className="block mt-4 text-white-200 mr-4 cursor-pointer mx-2"
                 onClick={() => router.push("/auth/login")}
               >
                 <img
@@ -193,7 +193,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
                 </span>
               </li>
               <li
-                className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 cursor-pointer mx-2"
+                className="block mt-4 text-white-200 mr-4 cursor-pointer mx-2"
                 onClick={() => router.push("/auth/signup")}
               >
                 <img
