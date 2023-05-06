@@ -15,7 +15,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ userData }) => {
       <div className="relative h-96 rounded-b flex justify-center">
         <img
           src="https://source.unsplash.com/1600x900/?nature,photography,technology"
-          className="object-cover w-4/5 h-full rounded-b"
+          className="object-cover w-full h-full rounded-b"
           alt="cover"
         />
         <div className="absolute -bottom-6">
