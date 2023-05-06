@@ -16,14 +16,9 @@ const Cuiwahinfo: React.FC<CuiwahinfoProps> = ({}) => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   const superAdminEmail = "laybatehreemz@gmail.com";
-  const superAdminUsername = "Layba";
 
   useEffect(() => {
-    if (
-      user &&
-      user.email === superAdminEmail &&
-      user.displayName === superAdminUsername
-    ) {
+    if (user && user.email === superAdminEmail) {
       setIsAdmin(true);
     }
   }, [user]);
@@ -31,7 +26,7 @@ const Cuiwahinfo: React.FC<CuiwahinfoProps> = ({}) => {
   return (
     <>
       <LeftMenu />
-      <div className="w-full lg:w-[80%] xl:w-[70%] pt-16 px-2 mx-auto mt-4">
+      <div className="w-full lg:w-[80%] xl:w-[60%] pt-16 px-2 mx-auto mt-4">
         {isAdmin && (
           <button
             onClick={() => router.push("/cuiannouncement")}
@@ -41,7 +36,7 @@ const Cuiwahinfo: React.FC<CuiwahinfoProps> = ({}) => {
             Make an Announcement
           </button>
         )}
-        <div className="flex grid grid-cols-1 my-3 xl:mx-80 mx-10">
+        <div className="flex grid grid-cols-1 my-3">
           {loading ? (
             <p>Loading...</p>
           ) : announcement.length === 0 ? (

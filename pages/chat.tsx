@@ -62,7 +62,7 @@ const Chat: React.FC<ChatProps> = () => {
   return (
     <>
       <LeftMenu />
-      <div className="w-full lg:w-[80%] xl:w-[70%] pt-16 px-2 mx-auto mt-4">
+      <div className="w-full lg:w-[80%] xl:w-[60%] pt-16 px-2 mx-auto mt-4">
         <div className="mt-[20px] flex flex-col flex-grow w-full max-w-xl bg-white shadow-xl rounded-lg overflow-hidden dark:bg-[#28282B] xl:ml-[350px] md:ml-[150px] sm:ml-[70px]">
           <div className="flex px-8 py-2.5 justify-between">
             <div className="flex justify-start">
@@ -122,7 +122,7 @@ const Chat: React.FC<ChatProps> = () => {
                       <p className="text-sm flex justify-start lowercase">
                         {data.data().username}
                       </p>
-                      <div className="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
+                      <div className="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg dark:bg-black">
                         <p className="text-sm font-medium">
                           {data.data().meassage}
                         </p>

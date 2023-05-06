@@ -14,18 +14,18 @@ const AnnouncementItem: React.FC<AnnouncementItemProps> = (props) => {
 
   return (
     <>
-      <div className="w-full justify-center mx-auto text-center rounded-lg overflow-hidden shadow-lg mt-4 bg-black dark:bg-white">
-        <div className="pt-6">
+      <div className="w-[90%] justify-center mx-auto text-center rounded-lg overflow-hidden shadow-lg mt-4 bg-black dark:bg-white">
+        <div className="pt-8">
           <Image
             src={props.src}
             alt="card-image"
-            className="text-center mx-auto justify-center rounded-full"
-            height="250px"
-            width="250px"
+            className="text-center mx-auto justify-center rounded"
+            height="300px"
+            width="450px"
           />
         </div>
 
-        <div className="px-6 py-4">
+        <div className="px-6 py-8">
           <div className="font-bold text-white dark:text-black text-xl mb-2">
             {props.title}
           </div>

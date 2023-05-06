@@ -38,7 +38,6 @@ const Events: React.FC<EventsProps> = ({}) => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   const superAdminEmail = "laybatehreemz@gmail.com";
-  const superAdminUsername = "Layba";
 
   const fetchUserEvents = async (userId: string) => {
     const db = getFirestore(app);
@@ -59,10 +58,7 @@ const Events: React.FC<EventsProps> = ({}) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         fetchUserEvents(user.uid);
-        if (
-          user.email === superAdminEmail &&
-          user.displayName === superAdminUsername
-        ) {
+        if (user.email === superAdminEmail) {
           setIsAdmin(true);
         }
       } else {
@@ -91,7 +87,7 @@ const Events: React.FC<EventsProps> = ({}) => {
   return (
     <>
       <LeftMenu />
-      <div className="w-full lg:w-[80%] xl:w-[70%] pt-16 px-2 mx-auto mt-4">
+      <div className="w-full lg:w-[80%] xl:w-[60%] pt-16 px-2 mx-auto mt-4">
         {isAdmin && (
           <button
             onClick={() => router.push("/addnewevent")}

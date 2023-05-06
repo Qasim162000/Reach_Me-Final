@@ -172,7 +172,6 @@ const Post: React.FC<PostProps> = ({
     }
   };
 
-
   return (
     <div className="shadow bg-white  dark:text-white mt-4 rounded-lg dark:shadow-2xl dark:bg-[#28282B]">
       {/* <!-- POST AUTHOR --> */}
@@ -210,44 +209,43 @@ const Post: React.FC<PostProps> = ({
         </div>
         <div className="w-8 h-8 grid place-items-center text-xl text-black hover:bg-gray-200 dark:text-dark-txt dark:hover:bg-dark-third rounded-full cursor-pointer">
           {/* <i className="bx bx-dots-horizontal-rounded">&hellip;</i> */}
-          {
-            user?.uid && (
-              <>
-                <IconButton
-                  aria-label="more"
-                  aria-controls="post-options-menu"
-                  aria-haspopup="true"
-                  onClick={handleMenuOpen}
-                  size="small"
-                >
-                  <MoreVertIcon />
-                </IconButton>
-                <Menu
-                  id="post-options-menu"
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={handleMenuClose}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "right",
-                  }}
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                >
-                  <MenuItem onClick={() => {
+          {user?.uid && (
+            <>
+              <IconButton
+                aria-label="more"
+                aria-controls="post-options-menu"
+                aria-haspopup="true"
+                onClick={handleMenuOpen}
+                size="small"
+              >
+                <MoreVertIcon />
+              </IconButton>
+              <Menu
+                id="post-options-menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "right",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+              >
+                <MenuItem
+                  onClick={() => {
                     deletePost();
                     handleMenuClose();
-                  }}>
-                    <DeleteIcon />
-                    Delete
-                  </MenuItem>
-                </Menu>
-              </>
-            )
-        }
-
+                  }}
+                >
+                  <DeleteIcon />
+                  Delete
+                </MenuItem>
+              </Menu>
+            </>
+          )}
         </div>
         {/* {
           user?.uid && (
@@ -374,7 +372,7 @@ const Post: React.FC<PostProps> = ({
                 </motion.div>
               ) : (
                 <motion.div
-                  className="w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200  text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-gray-300"
+                  className="w-1/2 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200  text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-gray-300"
                   onClick={likePost}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
@@ -403,8 +401,8 @@ const Post: React.FC<PostProps> = ({
                 whileTap={{ scale: 0.9 }}
                 className={
                   open
-                    ? `w-1/3 flex space-x-2 justify-center items-center bg-gray-100 dark:bg-gray-800  dark:hover:bg-gray-800  text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-gray-300 dark:hover:text-gray-200`
-                    : `w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-gray-800 text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-gray-300 dark:hover:text-gray-200`
+                    ? `w-1/2 flex space-x-2 justify-center items-center bg-gray-100 dark:bg-gray-800  dark:hover:bg-gray-800  text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-gray-300 dark:hover:text-gray-200`
+                    : `w-1/2 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-gray-800 text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-gray-300 dark:hover:text-gray-200`
                 }
                 onClick={open ? () => setOpen(false) : () => setOpen(true)}
               >
@@ -424,15 +422,6 @@ const Post: React.FC<PostProps> = ({
                 </svg>
 
                 <span className="text-sm font-semibold">Comment</span>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-gray-800 text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-gray-300 dark:hover:text-gray-200"
-              >
-                <RiShareForwardLine className="w-6 h-6" />
-
-                <span className="text-sm font-semibold">Share</span>
               </motion.div>
             </div>
           </div>
@@ -500,13 +489,13 @@ const Post: React.FC<PostProps> = ({
                       className="outline-none bg-transparent flex-1 dark:placeholder:text-gray-300"
                     />
                     {loading ? (
-                      <LoopIcon className="animate-spin text-blue-500 dark:text-blue-300 cursor-not-allowed mr-5" />
+                      <LoopIcon className="animate-spin text-blue-500 dark:text-blue-300 cursor-not-allowed ml-5 mr-5" />
                     ) : (
                       <button
                         type="submit"
                         disabled={!comment}
                         onClick={sendComment}
-                        className="font-semibold text-blue-400 mr-5 dark:text-blue-200"
+                        className="font-semibold text-blue-400 mr-5 dark:text-blue-200 ml-4"
                       >
                         Post
                       </button>

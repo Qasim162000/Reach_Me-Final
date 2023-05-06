@@ -59,7 +59,7 @@ const Projects: React.FC<ProjectsProps> = ({}) => {
   return (
     <>
       <LeftMenu />
-      <div className="w-full lg:w-[80%] xl:w-[70%] pt-16 px-2 mx-auto mt-4 text-center">
+      <div className="w-full lg:w-[80%] xl:w-[60%] pt-16 px-2 mx-auto mt-4 text-center">
         <button
           onClick={() => router.push("/projectentry")}
           type="button"

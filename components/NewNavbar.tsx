@@ -178,7 +178,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
         )}
         {!user && (
           <>
-            <div className="text-sm lg:flex-grow text-end">
+            <div className="text-sm lg:flex-grow text-end xl:inline-flex justify-end">
               <li
                 className="block mt-4 text-white-200 mr-4 cursor-pointer mx-2"
                 onClick={() => router.push("/auth/login")}
@@ -186,7 +186,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
                 <img
                   src="https://th.bing.com/th/id/OIP.Cl56H6WgxJ8npVqyhefTdQHaHa?pid=ImgDet&rs=1"
                   alt="Profile picture"
-                  className="rounded-full h-10 w-10 lg:mx-auto ml-auto sm:mr-1"
+                  className="rounded-full h-10 w-10 ml-auto sm:mr-1"
                 />
                 <span className="mx-2 font-semibold dark:text-dark-txt">
                   Login
@@ -199,7 +199,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
                 <img
                   src="https://th.bing.com/th/id/OIP.Cl56H6WgxJ8npVqyhefTdQHaHa?pid=ImgDet&rs=1"
                   alt="Profile picture"
-                  className="rounded-full h-10 w-10 lg:mx-auto ml-auto sm:mr-1"
+                  className="rounded-full h-10 w-10 ml-auto sm:mr-1"
                 />
                 <span className="mx-2 font-semibold dark:text-dark-txt">
                   Sign Up
