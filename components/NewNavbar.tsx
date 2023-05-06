@@ -137,13 +137,13 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
               </li>
             ))}
             <li
-              className="block mt-4 lg:mt-[4px] text-white-200 mr-4 cursor-pointer mx-2"
+              className="block mt-4 lg:mt-[2px] text-white-200 mr-4 cursor-pointer mx-2"
               onClick={() => logout()}
             >
               <img
-                src="https://i.postimg.cc/jjQ99snB/126467.png"
+                src="https://i.postimg.cc/HkPFRrvg/image-2023-05-06-234001089-removebg-preview.png"
                 alt="Profile picture"
-                className="w-5 h-5 lg:mx-auto ml-auto sm:mr-1"
+                className="w-7 h-7 lg:mx-auto ml-auto sm:mr-1"
               />
             </li>
             {resolvedTheme === "dark" ? (
