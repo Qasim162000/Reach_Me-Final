@@ -52,7 +52,7 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
   return (
     <>
       <Head>
-        <title>Reach me - Sign up</title>
+        <title>Reach Me - Sign up</title>
         <meta name="description" content="Reach Me - Login" />
         <link
           rel="apple-touch-icon"

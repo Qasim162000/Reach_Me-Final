@@ -39,7 +39,7 @@ const Loginwithemail: React.FC<LoginwithemailProps> = ({}) => {
   return (
     <>
       <Head>
-        <title>Reach me - Login</title>
+        <title>Reach Me - Login</title>
         <meta name="description" content="Reach Me - Login" />
         <link
           rel="apple-touch-icon"

@@ -36,7 +36,7 @@ const Login: React.FC<LoginProps> = () => {
       viewport={{ once: true }}
     >
       <Head>
-        <title>Reach me - Login</title>
+        <title>Reach Me - Login</title>
         <meta name="description" content="Reach Me - Login" />
         <link
           rel="apple-touch-icon"
