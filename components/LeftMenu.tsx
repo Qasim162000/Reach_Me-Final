@@ -143,7 +143,7 @@ const LeftMenu: React.FC<LeftMenuProps> = () => {
               </div>
             </li>
             {resolvedTheme === "dark" ? (
-              <li className="block mt-10 ml-3 text-white-200 mr-4 cursor-pointer mx-auto">
+              <li className="block mt-10 ml-3.5 text-white-200 mr-4 cursor-pointer mx-auto">
                 <motion.div
                   onClick={() =>
                     setTheme(resolvedTheme === "dark" ? "light" : "dark")
@@ -153,7 +153,7 @@ const LeftMenu: React.FC<LeftMenuProps> = () => {
                 </motion.div>
               </li>
             ) : (
-              <li className="block mt-10 ml-3 text-white-200 mr-4 cursor-pointer mx-auto">
+              <li className="block mt-10 ml-3.5 text-white-200 mr-4 cursor-pointer mx-auto">
                 <motion.div
                   onClick={() =>
                     setTheme(resolvedTheme === "dark" ? "light" : "dark")

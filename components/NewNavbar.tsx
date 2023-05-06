@@ -143,11 +143,11 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
               <img
                 src="https://i.postimg.cc/HkPFRrvg/image-2023-05-06-234001089-removebg-preview.png"
                 alt="Profile picture"
-                className="w-7 h-7 lg:mx-auto ml-auto sm:mr-1"
+                className="w-7 h-7 lg:mx-auto ml-auto "
               />
             </li>
             {resolvedTheme === "dark" ? (
-              <li className="block mt-5 text-white-200 mr-5 cursor-pointer mx-2">
+              <li className="block mt-[22px] text-white-200 mr-5 cursor-pointer mx-2">
                 <motion.div
                   onClick={() =>
                     setTheme(resolvedTheme === "dark" ? "light" : "dark")
@@ -157,7 +157,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
                 </motion.div>
               </li>
             ) : (
-              <li className="block mt-5 text-white-200 mr-5 cursor-pointer mx-2">
+              <li className="block mt-[22px] text-white-200 mr-5 cursor-pointer mx-2">
                 <motion.div
                   onClick={() =>
                     setTheme(resolvedTheme === "dark" ? "light" : "dark")
