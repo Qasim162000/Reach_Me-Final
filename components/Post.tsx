@@ -173,7 +173,7 @@ const Post: React.FC<PostProps> = ({
   };
 
   return (
-    <div className="shadow bg-white  dark:text-white mt-4 rounded-lg dark:shadow-2xl dark:bg-[#28282B]">
+    <div className="shadow bg-white dark:text-white mt-4 rounded-lg dark:shadow-2xl dark:bg-[#28282B]">
       {/* <!-- POST AUTHOR --> */}
       <div className="flex items-center justify-between px-4 py-2">
         <div className="flex space-x-2 items-center">

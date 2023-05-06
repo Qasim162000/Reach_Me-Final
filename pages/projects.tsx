@@ -68,7 +68,7 @@ const Projects: React.FC<ProjectsProps> = ({}) => {
           Add a New Project
         </button>
         {loading ? (
-          <div className="text-gray-700 text-center my-4 xl:ml-[250px]">
+          <div className="text-gray-700 text-center my-4 xl:ml-[200px]">
             Loading...
           </div>
         ) : (
@@ -77,7 +77,7 @@ const Projects: React.FC<ProjectsProps> = ({}) => {
               projects.map((project) => (
                 <div
                   key={project.id}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden"
+                  className="bg-white rounded-lg shadow-lg border-2 overflow-hidden"
                 >
                   <img
                     className="h-auto w-auto object-cover"

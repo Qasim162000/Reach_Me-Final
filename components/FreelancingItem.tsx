@@ -12,11 +12,9 @@ interface FreelancingItemProps {
 
 const FreelancingItem: React.FC<FreelancingItemProps> = (props) => {
   return (
-    <div className="w-auto px-10 my-4 py-6 bg-white rounded-lg shadow-md">
+    <div className="w-full px-10 my-4 py-6 bg-white rounded-lg shadow-lg border-2 text-center justify-center mx-auto">
       <div className="flex justify-between items-center">
-        <span className="font-light text-gray-600">
-          Last Date to Apply: {props.date}
-        </span>
+        <span className="text-gray-600">Last Date to Apply: {props.date}</span>
         <div className="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500">
           {props.niche}
         </div>

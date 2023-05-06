@@ -71,18 +71,18 @@ const Freelancing: React.FC<FreelancingProps> = ({}) => {
   return (
     <>
       <LeftMenu />
-      <div className="w-full lg:w-[80%] xl:w-[70%] pt-16 px-2 mx-auto mt-4 text-center">
+      <div className="w-full lg:w-[80%] pt-16 px-2 mt-4 mx-auto text-center">
         <button
           onClick={() => router.push("/projectdetails")}
           type="button"
-          className="animate-pulse bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-10 mt-4 xl:ml-[200px]"
+          className="animate-pulse bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-10 mt-4 xl:ml-[270px]"
         >
           Add a New Project
         </button>
         {loading ? (
           <div className="xl:ml-[200px] mt-20">Loading...</div>
         ) : projects.length > 0 ? (
-          <div className="flex grid grid-cols-1 my-3 xl:mx-80 mx-10 xl:ml-[250px]">
+          <div className="flex grid grid-cols-1 my-3 xl:ml-80 mx-10">
             {projects?.map((item: any, index: any) => {
               return (
                 <FreelancingItem
