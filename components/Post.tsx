@@ -264,7 +264,7 @@ const Post: React.FC<PostProps> = ({
       {/* <!-- POST IMAGE --> */}
       {image && (
         <div className="flex justify-center py-2 m-auto">
-          <img src={image} alt="Post image" />
+          <img src={image} alt="Post image" className="w-full" />
         </div>
       )}
       {/*  <!-- END POST IMAGE --> */}
