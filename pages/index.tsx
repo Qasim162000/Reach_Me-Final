@@ -4,19 +4,20 @@ import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { motion } from "framer-motion";
 import Feed from "../components/Feed";
-import Messenger from "../components/messenger/Messenger";
+
 import PostForm from "../components/PostForm";
 import NewNavbar from "../components/NewNavbar";
 import { auth } from "../firebase/firebase";
 import LeftMenu from "../components/LeftMenu";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
   const [user] = useAuthState(auth);
-  const [isMessenger, setIsMessenger] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (!user) {
-      setIsMessenger(false);
+      router.push("/auth/login");
     }
   }, [user]);
 
@@ -59,25 +60,14 @@ const Home: NextPage = () => {
       <section className="flex justify-center h-screen overflow-y-scroll">
         <LeftMenu />
         <div className="w-full lg:w-2/3 xl:w-2/5 pt-16 px-2">
-          {isMessenger ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="flex flex-col items-center justify-center h-auto min-h-screen bg-gray-100 text-gray-800 dark:bg-[#28282B]"
-            >
-              <Messenger />
-            </motion.div>
-          ) : (
-            <>
-              {user && (
-                <>
-                  <PostForm isShow={true} />
-                </>
-              )}
-              <Feed />
-            </>
-          )}
+          <>
+            {user && (
+              <>
+                <PostForm isShow={true} />
+              </>
+            )}
+            <Feed />
+          </>
         </div>
       </section>
     </motion.div>
