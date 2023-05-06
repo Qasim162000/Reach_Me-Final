@@ -143,7 +143,7 @@ const Chat: React.FC<ChatProps> = () => {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="flex items-center h-10 w-full rounded px-3 text-sm outline-none"
+              className="flex items-center h-10 w-full text-black rounded px-3 text-sm outline-none"
               type="text"
               placeholder="Type your message…"
             />

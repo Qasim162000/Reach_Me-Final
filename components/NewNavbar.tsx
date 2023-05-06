@@ -108,10 +108,10 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
         }`}
       >
         {user && (
-          <div className="text-sm lg:hidden text-end">
+          <div className="text-sm lg:inline-flex ml-auto text-end">
             <li
               onClick={handleChangePage}
-              className="block mt-4 text-white-200 mr-4 cursor-pointer mx-2"
+              className="block text-white-200 mr-4 cursor-pointer mx-2"
             >
               <img
                 src={
@@ -119,25 +119,21 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
                   "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
                 }
                 alt="Profile picture"
-                className="w-6 h-6 rounded-full lg:mx-auto ml-auto"
+                className="w-8 h-8 rounded-full lg:mx-auto ml-auto"
               />
-              <span className="font-semibold">{user?.displayName}</span>
             </li>
 
             {topData.map((data, index) => (
               <li
-                className="block mt-4 xl:hidden lg:mt-0 text-white-200 mr-4 cursor-pointer mx-2"
+                className="block mt-3 lg:mt-0 text-white-200 mr-4 cursor-pointer mx-2"
                 key={index}
                 onClick={() => handleNavigation(data)}
               >
                 <img
                   src={data.image}
                   alt="Profile picture"
-                  className="w-6 h-6 rounded-full lg:mx-auto ml-auto"
+                  className="w-8 h-8 rounded-full lg:mx-auto ml-auto"
                 />
-                <button type="button" className="font-semibold text-sm">
-                  {data.name}
-                </button>
               </li>
             ))}
             <li
