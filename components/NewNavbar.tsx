@@ -180,7 +180,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
           <>
             <div className="text-sm lg:flex-grow text-end xl:inline-flex lg:inline-flex justify-end">
               <li
-                className="block mt-4 text-white-200 mr-4 cursor-pointer mx-2"
+                className="block text-white-200 mr-4 cursor-pointer mx-2"
                 onClick={() => router.push("/auth/login")}
               >
                 <img
@@ -193,7 +193,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
                 </span>
               </li>
               <li
-                className="block mt-4 text-white-200 mr-4 cursor-pointer mx-2"
+                className="block text-white-200 mr-4 cursor-pointer mx-2"
                 onClick={() => router.push("/auth/signup")}
               >
                 <img

@@ -80,7 +80,9 @@ const Freelancing: React.FC<FreelancingProps> = ({}) => {
           Add a New Project
         </button>
         {loading ? (
-          <div className="xl:ml-[200px] mt-20">Loading...</div>
+          <div className="text-gray-700 text-center my-4 xl:ml-[270px]">
+            Loading...
+          </div>
         ) : projects.length > 0 ? (
           <div className="flex grid grid-cols-1 my-3 xl:ml-80 mx-10">
             {projects?.map((item: any, index: any) => {
