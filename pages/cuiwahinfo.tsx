@@ -15,7 +15,7 @@ const Cuiwahinfo: React.FC<CuiwahinfoProps> = ({}) => {
   const [user] = useAuthState(auth);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const superAdminEmail = "m.qasim@gmail.com";
+  const superAdminEmail = "laybatehreemz@gmail.com";
 
   useEffect(() => {
     if (user && user.email === superAdminEmail) {

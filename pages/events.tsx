@@ -37,7 +37,7 @@ const Events: React.FC<EventsProps> = ({}) => {
   const router = useRouter();
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const superAdminEmail = "m.qasim@gmail.com";
+  const superAdminEmail = "laybatehreemz@gmail.com";
 
   const fetchUserEvents = async (userId: string) => {
     const db = getFirestore(app);
