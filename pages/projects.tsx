@@ -59,18 +59,20 @@ const Projects: React.FC<ProjectsProps> = ({}) => {
   return (
     <>
       <LeftMenu />
-      <div className="w-full lg:w-[80%] xl:w-[60%] pt-16 px-2 mx-auto mt-4 text-center">
+      <div className="w-full lg:w-[80%] xl:w-[70%] pt-16 px-2 mx-auto mt-4 text-center">
         <button
           onClick={() => router.push("/projectentry")}
           type="button"
-          className="animate-pulse bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-10 mt-4"
+          className="animate-pulse bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-10 mt-4 xl:ml-[200px]"
         >
           Add a New Project
         </button>
         {loading ? (
-          <div className="text-gray-700 text-center my-4">Loading...</div>
+          <div className="text-gray-700 text-center my-4 xl:ml-[250px]">
+            Loading...
+          </div>
         ) : (
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4 px-4">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mt-4 px-4 mt-20 xl:ml-[200px]">
             {projects.length > 0 ? (
               projects.map((project) => (
                 <div
@@ -78,7 +80,7 @@ const Projects: React.FC<ProjectsProps> = ({}) => {
                   className="bg-white rounded-lg shadow-lg overflow-hidden"
                 >
                   <img
-                    className="h-48 w-full object-cover"
+                    className="h-auto w-auto object-cover"
                     src={project.gallery}
                     alt="Project gallery"
                   />
@@ -89,7 +91,7 @@ const Projects: React.FC<ProjectsProps> = ({}) => {
                     <button
                       onClick={() => deleteProject(project.id)}
                       type="button"
-                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded h-6 mt-2"
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold w-20 h-8 rounded h-6 mt-2"
                     >
                       Delete
                     </button>

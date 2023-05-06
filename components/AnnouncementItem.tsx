@@ -19,7 +19,7 @@ const AnnouncementItem: React.FC<AnnouncementItemProps> = (props) => {
           <Image
             src={props.src}
             alt="card-image"
-            className="text-center mx-auto justify-center rounded"
+            className="text-center mx-auto justify-center rounded-lg"
             height="300px"
             width="450px"
           />

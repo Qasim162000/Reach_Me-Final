@@ -10,6 +10,12 @@ interface ProjectentryProps {}
 const Projectentry: React.FC<ProjectentryProps> = ({}) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [user, loading, error] = useAuthState(auth);
+  const [formStatus, setFormStatus] = useState({
+    isLoading: false,
+    isSuccess: false,
+    isError: false,
+    errorMessage: "",
+  });
 
   const [formDetails, setFormDetails] = useState<{
     youtubeVideoLink: string;
@@ -37,6 +43,12 @@ const Projectentry: React.FC<ProjectentryProps> = ({}) => {
 
   const FormSubmitHandler = async (e: any) => {
     e.preventDefault();
+    setFormStatus({
+      isLoading: true,
+      isSuccess: false,
+      isError: false,
+      errorMessage: "",
+    });
 
     if (!formDetails.gallery) {
       alert("Please upload an image for the project.");
@@ -64,7 +76,12 @@ const Projectentry: React.FC<ProjectentryProps> = ({}) => {
       description: formDetails.description,
       gallery: imageURL,
     });
-
+    setFormStatus({
+      isLoading: false,
+      isSuccess: true,
+      isError: false,
+      errorMessage: "",
+    });
     setFormDetails({
       youtubeVideoLink: "",
       title: "",
@@ -88,92 +105,152 @@ const Projectentry: React.FC<ProjectentryProps> = ({}) => {
   return (
     <>
       <LeftMenu />
-      <div className="w-full lg:w-[80%] xl:w-[60%] pt-16 px-2 mx-auto mt-4">
-        <form
-          method="post"
-          onSubmit={FormSubmitHandler}
-          className="flex flex-col justify-center xl:mx-80 mx-10"
-        >
-          <h1 className="ml-2 text-2xl font-bold leading-7 text-start text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-4 dark:text-white">
-            Enter Project Details!
-          </h1>
-          <div className="flex w-[90%] mx-auto ml-0">
+      <form
+        method="post"
+        onSubmit={FormSubmitHandler}
+        className="w-full max-w-3xl mt-32 px-2 mx-auto justify-center"
+      >
+        <h1 className="text-2xl font-bold leading-7 text-start text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-4 dark:text-white">
+          Enter Project Details!
+        </h1>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label
+              className="block uppercase tracking-wide text-black dark:text-white text-xs font-bold mb-2"
+              htmlFor="youtubeVideoLink"
+            >
+              Youtube Video's URL
+            </label>
             <input
+              className="appearance-none block w-full bg-gray-200 text-black rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               type="text"
               value={formDetails.youtubeVideoLink}
               onChange={onChange}
               id="youtubeVideoLink"
               name="youtubeVideoLink"
-              placeholder="Youtube Video URL here"
-              className="text-black block border border-grey-light p-2 rounded mb-4 w-full mx-2"
               required
             />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <label
+              className="block uppercase tracking-wide text-black dark:text-white text-xs font-bold mb-2"
+              htmlFor="techs"
+            >
+              Tech Used
+            </label>
             <input
+              className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               type="text"
               value={formDetails.techs}
               onChange={onChange}
               id="techs"
               name="techs"
-              placeholder="Techs used in the Project"
-              className="text-black block border border-grey-light p-2 rounded mb-4 w-full mx-2"
               required
             />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <label
+              className="block uppercase tracking-wide text-black dark:text-white text-xs font-bold mb-2"
+              htmlFor="department"
+            >
+              Department
+            </label>
             <input
+              className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               type="text"
               value={formDetails.department}
               onChange={onChange}
               id="department"
               name="department"
-              placeholder="Department"
-              className="text-black block border border-grey-light rounded h-10 ml-4 w-full mr-3"
               required
             />
           </div>
-          <div className="flex w-[90%] mx-auto ml-0">
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full px-3">
+            <label
+              className="block uppercase tracking-wide text-black dark:text-white text-xs font-bold mb-2"
+              htmlFor="title"
+            >
+              Project Title
+            </label>
             <input
+              className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               type="text"
               value={formDetails.title}
               onChange={onChange}
               id="title"
               name="title"
-              placeholder="Project Title"
-              className="text-black block border border-grey-light p-2 rounded mb-4 w-full ml-2 mr-3"
               required
             />
           </div>
-          <textarea
-            value={formDetails.description}
-            onChange={onChange}
-            id="description"
-            name="description"
-            placeholder="Brief the community about it"
-            rows={3}
-            className="text-black block border border-grey-light w-full p-2 rounded mb-4 w-[88%] mx-auto mb-3 ml-2"
-            required
-          />
-          <div className="flex text-start ml-2">
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-2">
+          <div className="w-full px-3 mb-6 md:mb-0">
+            <label
+              className="block uppercase tracking-wide text-black dark:text-white text-xs font-bold mb-2"
+              htmlFor="description"
+            >
+              Details
+            </label>
+            <textarea
+              className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              value={formDetails.description}
+              onChange={onChange}
+              id="description"
+              name="description"
+              placeholder="Give a brief Overview of the project"
+              rows={3}
+              required
+            />
+          </div>
+          <div className="w-full px-3 mb-6 md:mb-0">
             <input
               type="file"
               alt="gallery"
               id="gallery"
               name="gallery"
               onChange={onChange}
-              className="mt-1 mb-5"
+              className="mt-5 mb-5"
             />
           </div>
-
-          <button
-            type="submit"
-            disabled={isProcessing}
-            className="w-24 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
-          >
-            Post
-          </button>
-          {isProcessing && (
-            <div className="text-gray-700 text-center my-4">Processing...</div>
+        </div>
+        <button
+          type="submit"
+          disabled={isProcessing}
+          className="w-24 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Post
+        </button>
+        <div className="mt-6">
+          {formStatus.isLoading && (
+            <div
+              className="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+              role="alert"
+            >
+              Processing...
+            </div>
           )}
-        </form>
-      </div>
+          {formStatus.isSuccess && (
+            <div
+              className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+              role="alert"
+            >
+              <span className="font-medium">Success: </span> Project added
+              successfully
+            </div>
+          )}
+          {formStatus.isError && (
+            <div
+              className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+              role="alert"
+            >
+              <span className="font-medium">Error: </span>{" "}
+              {formStatus.errorMessage}
+            </div>
+          )}
+        </div>
+      </form>
     </>
   );
 };

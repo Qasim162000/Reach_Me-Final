@@ -20,9 +20,7 @@ type LoginProps = {};
 const Login: React.FC<LoginProps> = () => {
   const [user] = useAuthState(auth);
   const router = useRouter();
-  const [signInWithGoogle, userCred, loading, error] =
-    useSignInWithGoogle(auth);
-
+  const [signInWithGoogle] = useSignInWithGoogle(auth);
   useEffect(() => {
     if (user) {
       router.push("/");

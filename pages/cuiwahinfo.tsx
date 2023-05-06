@@ -36,7 +36,7 @@ const Cuiwahinfo: React.FC<CuiwahinfoProps> = ({}) => {
             Make an Announcement
           </button>
         )}
-        <div className="flex grid grid-cols-1 my-3">
+        <div className="flex grid grid-cols-1 my-3 xl:ml-[250px]">
           {loading ? (
             <p>Loading...</p>
           ) : announcement.length === 0 ? (
