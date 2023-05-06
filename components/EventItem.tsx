@@ -6,7 +6,7 @@ import { auth } from "../firebase/firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 import { firestore } from "../firebase/firebase";
 
-const SUPER_ADMIN_EMAIL = "superadmin@example.com";
+const superAdminEmail = "laybatehreemz@gmail.com";
 
 interface EventItemProps {
   image: string;
@@ -35,7 +35,7 @@ const EventItem: React.FC<EventItemProps> = ({
   const [user] = useAuthState(auth);
 
   useEffect(() => {
-    if (user && user.email === SUPER_ADMIN_EMAIL) {
+    if (user && user.email === superAdminEmail) {
       setIsAdmin(true);
     } else {
       setIsAdmin(false);
@@ -72,9 +72,9 @@ const EventItem: React.FC<EventItemProps> = ({
             </p>
           </div>
           {isAdmin && (
-            <div className="flex justify-end">
+            <div className="flex justify-center mt-6">
               <button
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-2"
+                className="bg-red-500 hover:bg-red-700 text-white font-bold h-9 w-20 rounded mt-2"
                 onClick={handleDelete}
               >
                 Delete
