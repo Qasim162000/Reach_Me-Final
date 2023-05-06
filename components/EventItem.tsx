@@ -53,7 +53,7 @@ const EventItem: React.FC<EventItemProps> = ({
       <div className="flex flex-col justify-between bg-white rounded-lg shadow-xl border-2">
         <Image src={image} alt={title} width="800" height="500" />
         <div className="p-6">
-          <h3 className="text-xl font-semibold mb-2">{title}</h3>
+          <h3 className="text-xl font-semibold mb-2 text-black">{title}</h3>
           <p className="text-gray-700 text-lg mb-2">{description}</p>
           <div className="flex justify-between items-center">
             <p className="text-gray-600 text-xs">
