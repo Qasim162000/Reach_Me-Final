@@ -12,6 +12,13 @@ import LeftMenu from "../components/LeftMenu";
 interface NewEventProps {}
 
 const NewEvent: React.FC<NewEventProps> = ({}) => {
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [formStatus, setFormStatus] = useState({
+    isLoading: false,
+    isSuccess: false,
+    isError: false,
+    errorMessage: "",
+  });
   const [formDetails, setFormDetails] = useState({
     image: "",
     title: "",
@@ -44,7 +51,12 @@ const NewEvent: React.FC<NewEventProps> = ({}) => {
 
   const FormSubmitHandler = async (E: any) => {
     E.preventDefault();
-
+    setFormStatus({
+      isLoading: true,
+      isSuccess: false,
+      isError: false,
+      errorMessage: "",
+    });
     if (isUploading) {
       alert("Please wait for the image to finish uploading.");
       return;
@@ -116,87 +128,124 @@ const NewEvent: React.FC<NewEventProps> = ({}) => {
   return (
     <>
       <LeftMenu />
-      <div className="w-full lg:w-[80%] xl:w-[60%] pt-16 px-2 mx-auto mt-4">
-        <form
-          method="post"
-          onSubmit={FormSubmitHandler}
-          className="flex flex-col justify-center xl:mx-80 mx-10"
-        >
-          <h1 className="ml-2 text-2xl font-bold leading-7 text-start text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-4 dark:text-white">
-            Enter Event Details!
-          </h1>
-          <div className="flex w-[90%] mx-auto ml-2">
-            <div className="flex flex-col mr-4">
-              <label className="text-lg text-center mt-[-6px]">Deadline</label>
-              <input
-                type="date"
-                value={formDetails.date}
-                onChange={onChange}
-                id="date"
-                name="date"
-                className="text-black block border border-grey-light w-full rounded mb-4"
-                required
-              />
-            </div>
-            <div className="flex flex-col mr-4">
-              <label className="text-lg text-center mt-[-6px]">Time</label>
-              <input
-                type="time"
-                value={formDetails.time}
-                onChange={onChange}
-                id="time"
-                name="time"
-                className="text-black block border border-grey-light w-full rounded mb-4"
-                required
-              />
-            </div>
-            <div className="flex flex-col">
-              <label className="text-lg text-center mt-[-6px]">Venue</label>
-              <input
-                type="text"
-                value={formDetails.place}
-                onChange={onChange}
-                id="place"
-                name="place"
-                placeholder="Venue"
-                className="text-black block border border-grey-light lg:w-80 rounded mb-4"
-                required
-              />
-            </div>
-          </div>
-          <div className="flex w-[90%] mx-auto ml-0">
+
+      <form
+        method="post"
+        onSubmit={FormSubmitHandler}
+        className="w-full max-w-3xl mt-32 px-2 mx-auto justify-center"
+      >
+        <h1 className="text-2xl font-bold leading-7 text-start text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-4 dark:text-white">
+          Enter Event Details!
+        </h1>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label
+              className="block uppercase tracking-wide text-black dark:text-white text-xs font-bold mb-2"
+              htmlFor="youtubeVideoLink"
+            >
+              Deadline
+            </label>
             <input
+              className="appearance-none block w-full bg-gray-200 text-black rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              type="date"
+              value={formDetails.date}
+              onChange={onChange}
+              id="date"
+              name="date"
+              required
+            />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <label
+              className="block uppercase tracking-wide text-black dark:text-white text-xs font-bold mb-2"
+              htmlFor="techs"
+            >
+              Time
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              type="time"
+              value={formDetails.time}
+              onChange={onChange}
+              id="time"
+              name="time"
+              required
+            />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <label
+              className="block uppercase tracking-wide text-black dark:text-white text-xs font-bold mb-2"
+              htmlFor="department"
+            >
+              Venue
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              type="text"
+              value={formDetails.place}
+              onChange={onChange}
+              id="place"
+              name="place"
+              required
+            />
+          </div>
+        </div>
+        <div className="w-full flex flex-wrap -mx-3 mb-6">
+          <div className="w-1/2 px-3">
+            <label
+              className="block uppercase tracking-wide text-black dark:text-white text-xs font-bold mb-2"
+              htmlFor="title"
+            >
+              Event's Name
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               type="text"
               value={formDetails.title}
               onChange={onChange}
               id="title"
               name="title"
-              placeholder="Project Title"
-              className="text-black block border border-grey-light p-2 rounded mb-4 w-full mx-2"
               required
             />
+          </div>
+          <div className="w-1/2 px-3">
+            <label
+              className="block uppercase tracking-wide text-black dark:text-white text-xs font-bold mb-2"
+              htmlFor="title"
+            >
+              Organizers
+            </label>
             <input
+              className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 mb-4 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               type="text"
               value={formDetails.organizers}
               onChange={onChange}
               id="organizers"
               name="organizers"
-              placeholder="Organizers"
-              className="text-black block border border-grey-light p-2 rounded mb-4 w-full mx-2"
               required
             />
           </div>
-          <textarea
-            value={formDetails.description}
-            onChange={onChange}
-            id="description"
-            name="description"
-            placeholder="Brief the community about it"
-            rows={3}
-            className="text-black block border border-grey-light w-full p-2 w-[89%] mx-auto mb-2 ml-2"
-            required
-          />
-          <div className="flex text-start ml-2">
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-2">
+          <div className="w-full px-3 mb-6 md:mb-0">
+            <label
+              className="block uppercase tracking-wide text-black dark:text-white text-xs font-bold mb-2"
+              htmlFor="description"
+            >
+              Details
+            </label>
+            <textarea
+              className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 mb-4 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              value={formDetails.description}
+              onChange={onChange}
+              id="description"
+              name="description"
+              placeholder="Brief the community about it"
+              rows={3}
+              required
+            />
+          </div>
+          <div className="w-full px-3 mb-6 md:mb-0">
             <input
               type="file"
               alt="Image"
@@ -205,23 +254,51 @@ const NewEvent: React.FC<NewEventProps> = ({}) => {
               className="mt-1 mb-5"
             />
           </div>
-          <button
-            type="submit"
-            disabled={isUploading || isSubmitting}
-            className={`w-24 ${
-              isUploading || isSubmitting
-                ? "bg-gray-500"
-                : "bg-blue-500 hover:bg-blue-700"
-            } text-white font-bold py-2 px-4 rounded ml-2`}
-          >
-            {isUploading
-              ? "Uploading image..."
-              : isSubmitting
-              ? "Processing..."
-              : "Post"}
-          </button>
-        </form>
-      </div>
+        </div>
+        <button
+          type="submit"
+          disabled={isUploading || isSubmitting}
+          className={`w-28 h-10 whitespace-nowrap ${
+            isUploading || isSubmitting
+              ? "bg-gray-500 w-60"
+              : "bg-blue-500 hover:bg-blue-700"
+          } text-white font-bold rounded`}
+        >
+          {isUploading
+            ? "Uploading image..."
+            : isSubmitting
+            ? "Processing..."
+            : "Post"}
+        </button>
+        <div className="mt-6">
+          {formStatus.isLoading && (
+            <div
+              className="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+              role="alert"
+            >
+              Processing...
+            </div>
+          )}
+          {formStatus.isSuccess && (
+            <div
+              className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+              role="alert"
+            >
+              <span className="font-medium">Success: </span> Project added
+              successfully
+            </div>
+          )}
+          {formStatus.isError && (
+            <div
+              className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+              role="alert"
+            >
+              <span className="font-medium">Error: </span>{" "}
+              {formStatus.errorMessage}
+            </div>
+          )}
+        </div>
+      </form>
     </>
   );
 };

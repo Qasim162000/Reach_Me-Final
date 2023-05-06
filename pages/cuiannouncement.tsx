@@ -85,62 +85,61 @@ const CUIAnnouncement: React.FC<CUIAnnouncementProps> = ({}) => {
   return (
     <>
       <LeftMenu />
-      <div className="w-full lg:w-[80%] xl:w-[60%] pt-16 px-2 mx-auto mt-4">
-        <form
-          method="post"
-          onSubmit={FormSubmitHandler}
-          className="flex flex-col justify-center xl:mx-80 mx-10"
+
+      <form
+        method="post"
+        onSubmit={FormSubmitHandler}
+        className="max-w-3xl mt-32 flex flex-col justify-center mx-auto mx-10"
+      >
+        <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-4 dark:text-white">
+          Share something with the Community!
+        </h1>
+        <input
+          type="text"
+          value={formDetails.title}
+          onChange={onChange}
+          id="title"
+          name="title"
+          placeholder="What's the Announcement for?"
+          className="text-black block border border-grey-light p-2 rounded mb-4 w-full "
+          required
+        />
+
+        <textarea
+          value={formDetails.description}
+          onChange={onChange}
+          id="description"
+          name="description"
+          placeholder="Brief the community about it"
+          rows={3}
+          className="text-black block border border-grey-light w-full p-2 rounded w-[90%] mx-auto mb-1"
+        />
+
+        <input
+          onChange={onImageChange}
+          id="src"
+          name="src"
+          accept="*"
+          type="file"
+          className="mt-3"
+        />
+        <button
+          type="submit"
+          className="mt-4 w-24 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
-          <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-4 dark:text-white">
-            Share something with the Community!
-          </h1>
-          <input
-            type="text"
-            value={formDetails.title}
-            onChange={onChange}
-            id="title"
-            name="title"
-            placeholder="What's the Announcement for?"
-            className="text-black block border border-grey-light p-2 rounded mb-4 w-full "
-            required
-          />
-
-          <textarea
-            value={formDetails.description}
-            onChange={onChange}
-            id="description"
-            name="description"
-            placeholder="Brief the community about it"
-            rows={3}
-            className="text-black block border border-grey-light w-full p-2 rounded w-[90%] mx-auto mb-1"
-          />
-
-          <input
-            onChange={onImageChange}
-            id="src"
-            name="src"
-            accept="*"
-            type="file"
-            className="mt-3"
-          />
-          <button
-            type="submit"
-            className="mt-4 w-24 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Post
-          </button>
-        </form>
-        {statusMessage && (
-          <div className="mt-4 text-center text-sm text-green-500">
-            {statusMessage}
-          </div>
-        )}
-        {processing && (
-          <div className="mt-4 text-center text-sm text-green-500">
-            processing...
-          </div>
-        )}
-      </div>
+          Post
+        </button>
+      </form>
+      {statusMessage && (
+        <div className="mt-4 text-center text-sm text-green-500">
+          {statusMessage}
+        </div>
+      )}
+      {processing && (
+        <div className="mt-4 text-center text-sm text-green-500">
+          processing...
+        </div>
+      )}
     </>
   );
 };

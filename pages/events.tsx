@@ -37,7 +37,7 @@ const Events: React.FC<EventsProps> = ({}) => {
   const router = useRouter();
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const superAdminEmail = "laybatehreemz@gmail.com";
+  const superAdminEmail = "m.qasim@gmail.com";
 
   const fetchUserEvents = async (userId: string) => {
     const db = getFirestore(app);
@@ -87,19 +87,21 @@ const Events: React.FC<EventsProps> = ({}) => {
   return (
     <>
       <LeftMenu />
-      <div className="w-full lg:w-[80%] xl:w-[60%] pt-16 px-2 mx-auto mt-4">
+      <div className="w-full lg:w-[80%] pt-16 px-2 mt-4 mx-auto text-center">
         {isAdmin && (
           <button
             onClick={() => router.push("/addnewevent")}
             type="button"
-            className="mx-auto w-56 animate-pulse bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-10 mb-4"
+            className="animate-pulse bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-10 mt-4 mb-4 xl:ml-[270px]"
           >
             Announce an Event
           </button>
         )}
-        <div className="flex grid grid-cols-1 xl:ml-[200px] my-3 xl:mx-80 mx-10">
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mt-4 px-4 xl:ml-[200px]">
           {loading ? (
-            <p>Loading...</p>
+            <div className="text-gray-700 text-center my-4 xl:ml-[270px]">
+              Loading...
+            </div>
           ) : event.length === 0 ? (
             <h1 className="text-2xl mt-4 text-center font-bold">
               No Events Found.

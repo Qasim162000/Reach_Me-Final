@@ -15,7 +15,7 @@ const Cuiwahinfo: React.FC<CuiwahinfoProps> = ({}) => {
   const [user] = useAuthState(auth);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const superAdminEmail = "laybatehreemz@gmail.com";
+  const superAdminEmail = "m.qasim@gmail.com";
 
   useEffect(() => {
     if (user && user.email === superAdminEmail) {
@@ -26,12 +26,12 @@ const Cuiwahinfo: React.FC<CuiwahinfoProps> = ({}) => {
   return (
     <>
       <LeftMenu />
-      <div className="w-full lg:w-[80%] xl:w-[60%] pt-16 px-2 mx-auto mt-4">
+      <div className="w-full lg:w-[80%] pt-16 px-2 mt-4 mx-auto text-center">
         {isAdmin && (
           <button
             onClick={() => router.push("/cuiannouncement")}
             type="button"
-            className="mx-auto w-56 animate-pulse bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-10 mb-4"
+            className="animate-pulse bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-10 mt-4 mb-4 xl:ml-[270px]"
           >
             Make an Announcement
           </button>

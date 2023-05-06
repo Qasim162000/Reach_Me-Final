@@ -137,7 +137,7 @@ const LeftMenu: React.FC<LeftMenuProps> = () => {
                   alt="Profile picture"
                   className="w-5 h-5 lg:mx-auto ml-auto"
                 />
-                <button type="button" className="font-semibold">
+                <button type="button" className="font-semibold pl-2">
                   Logout
                 </button>
               </div>

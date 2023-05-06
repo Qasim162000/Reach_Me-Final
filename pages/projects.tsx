@@ -63,16 +63,16 @@ const Projects: React.FC<ProjectsProps> = ({}) => {
         <button
           onClick={() => router.push("/projectentry")}
           type="button"
-          className="animate-pulse bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-10 mt-4 mb-16 xl:ml-[200px]"
+          className="animate-pulse bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-10 mt-4 mb-16 xl:ml-[270px]"
         >
           Add a New Project
         </button>
         {loading ? (
-          <div className="text-gray-700 text-center xl:ml-[200px]">
+          <div className="text-gray-700 text-center xl:ml-[270px]">
             Loading...
           </div>
         ) : (
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mt-4 px-4  xl:ml-[200px]">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mt-4 px-4 xl:ml-[200px]">
             {projects.length > 0 ? (
               projects.map((project) => (
                 <div

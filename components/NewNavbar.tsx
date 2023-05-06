@@ -137,20 +137,17 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
               </li>
             ))}
             <li
-              className="block mt-4 lg:hidden lg:mt-0 text-white-200 mr-4 cursor-pointer mx-2"
+              className="block mt-4 lg:mt-[4px] text-white-200 mr-4 cursor-pointer mx-2"
               onClick={() => logout()}
             >
               <img
                 src="https://i.postimg.cc/jjQ99snB/126467.png"
                 alt="Profile picture"
-                className="w-5 h-5 lg:mx-auto ml-auto"
+                className="w-5 h-5 lg:mx-auto ml-auto sm:mr-1"
               />
-              <button type="button" className="font-semibold">
-                Logout
-              </button>
             </li>
             {resolvedTheme === "dark" ? (
-              <li className="block mt-4 text-white-200 mr-4 cursor-pointer mx-2">
+              <li className="block mt-5 text-white-200 mr-5 cursor-pointer mx-2">
                 <motion.div
                   onClick={() =>
                     setTheme(resolvedTheme === "dark" ? "light" : "dark")
@@ -160,7 +157,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
                 </motion.div>
               </li>
             ) : (
-              <li className="block mt-4 text-white-200 mr-4 cursor-pointer mx-2">
+              <li className="block mt-5 text-white-200 mr-5 cursor-pointer mx-2">
                 <motion.div
                   onClick={() =>
                     setTheme(resolvedTheme === "dark" ? "light" : "dark")
