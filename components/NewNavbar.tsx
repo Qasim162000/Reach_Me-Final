@@ -64,7 +64,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
   };
 
   return (
-    <nav className="bg-white dark:bg-[#18191a] h-max flex items-center shadow justify-between flex-wrap fixed top-0 z-50 p-3 w-full">
+    <nav className="bg-white dark:bg-[#18191a] h-max flex items-center shadow justify-between flex-wrap fixed top-0 z-50 py-2 px-3 w-full">
       <div className="flex cursor-pointer" onClick={() => router.push("/")}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -87,14 +87,14 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
           className="flex items-center px-3 py-2 rounded text-black-500 hover:text-black-400"
         >
           <svg
-            className={`fill-current h-3 w-3 ${isOpen ? "hidden" : "block"}`}
+            className={`fill-current h-3 w-3 mr-3.5 ${isOpen ? "hidden" : "block"}`}
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
           </svg>
           <svg
-            className={`fill-current h-3 w-3 ${isOpen ? "block" : "hidden"}`}
+            className={`fill-current h-3 w-3 mr-3.5 ${isOpen ? "block" : "hidden"}`}
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -108,7 +108,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
         }`}
       >
         {user && (
-          <div className="text-sm lg:inline-flex ml-auto text-end">
+          <div className="text-sm lg:inline-flex sm:mt-2.5 ml-auto text-end">
             <li
               onClick={handleChangePage}
               className="block text-white-200 mr-4 cursor-pointer mx-2"

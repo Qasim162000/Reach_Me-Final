@@ -486,7 +486,7 @@ const Post: React.FC<PostProps> = ({
                       onChange={(e) => setComment(e.target.value)}
                       type="text"
                       placeholder="Write a comment..."
-                      className="outline-none bg-transparent flex-1 dark:placeholder:text-gray-300"
+                      className="outline-none border-none bg-transparent flex-1 dark:placeholder:text-gray-300"
                     />
                     {loading ? (
                       <LoopIcon className="animate-spin text-blue-500 dark:text-blue-300 cursor-not-allowed ml-5 mr-5" />

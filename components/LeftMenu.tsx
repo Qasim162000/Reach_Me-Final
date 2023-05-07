@@ -128,15 +128,13 @@ const LeftMenu: React.FC<LeftMenuProps> = () => {
               </li>
             ))}
             <li
-              className="block mt-4 lg:inline-block text-white-200 mr-4 cursor-pointer mx-1.5"
               onClick={() => logout()}
             >
               <div className="flex items-center cursor-pointer space-x-2 p-2 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third">
                 <img
                   src="https://i.postimg.cc/HkPFRrvg/image-2023-05-06-234001089-removebg-preview.png"
                   alt="Profile picture"
-                  className="w-9 h-9 lg:mx-auto ml-auto"
-                />
+                  className="w-10 h-10 rounded-full pl-1"/>
                 <button type="button" className="font-semibold">
                   Logout
                 </button>
