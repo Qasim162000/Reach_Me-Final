@@ -84,7 +84,7 @@ export default function PostModel({ setOpen, open }: Props) {
           console.log("No Image");
         }
       } catch (error) {
-        // console.log(error);
+        console.log(error);
       }
       setSelectedFile("");
       setCaption("");

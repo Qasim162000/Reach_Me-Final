@@ -12,10 +12,10 @@ interface FreelancingItemProps {
 
 const FreelancingItem: React.FC<FreelancingItemProps> = (props) => {
   return (
-    <div className="w-full px-10 my-4 py-6 bg-white rounded-lg shadow-lg border-2 text-center justify-center mx-auto">
-      <div className="flex justify-between items-center">
-        <span className="text-gray-600">Last Date to Apply: {props.date}</span>
-        <div className="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500">
+    <div className="flex flex-col w-[90%] my-4 px-10 py-6 bg-white rounded-lg shadow-lg border-2 text-center mx-auto justify-between">
+      <div className="flex-col justify-between items-center">
+        <span className="text-gray-600">Deadline: {props.date}</span>
+        <div className="px-4 py-1 w-fit my-2 mx-auto bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500">
           {props.niche}
         </div>
       </div>
@@ -25,25 +25,20 @@ const FreelancingItem: React.FC<FreelancingItemProps> = (props) => {
         </div>
         <p className="mt-2 text-gray-600">{props.description}</p>
       </div>
-      <div className="flex justify-between items-center mt-4">
+      <div className="flex flex-col items-center mt-4">
         <a
-          className="text-blue-600 hover:underline"
+          className="text-blue-600 hover:underline mx-auto mb-4"
           href={`mailto:${props.email}`}
         >
           {props.email}
         </a>
-        <div>
-          <div className="flex items-center">
-            <h1 className="text-gray-700 font-bold">{props.user}</h1>
-          </div>
-        </div>
+        <button
+          onClick={props.onDelete}
+          className="bg-red-500 hover:bg-red-700 text-white font-bold w-[70px] h-[32px] rounded mx-auto"
+        >
+          Delete
+        </button>
       </div>
-      <button
-        onClick={props.onDelete}
-        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Delete
-      </button>
     </div>
   );
 };

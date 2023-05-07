@@ -26,7 +26,6 @@ const Loginwithemail: React.FC<LoginwithemailProps> = ({}) => {
     signInWithEmailAndPassword(auth, credentials.email, credentials.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        // console.log(user);
         router.push("/");
       })
       .catch((error) => {

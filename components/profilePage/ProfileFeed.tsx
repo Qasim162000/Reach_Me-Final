@@ -38,8 +38,6 @@ const ProfileFeed: React.FC<ProfileFeedProps> = ({
     setUserDetails(posts);
   }, [posts]);
 
-  /*   console.log(userName); */
-
   return (
     <>
       {loading ? (

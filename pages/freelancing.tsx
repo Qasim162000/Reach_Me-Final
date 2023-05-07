@@ -84,7 +84,7 @@ const Freelancing: React.FC<FreelancingProps> = ({}) => {
             Loading...
           </div>
         ) : projects.length > 0 ? (
-          <div className="flex grid grid-cols-1 my-3 xl:ml-80 mx-10">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 mt-4 px-4 xl:ml-[200px]">
             {projects?.map((item: any, index: any) => {
               return (
                 <FreelancingItem

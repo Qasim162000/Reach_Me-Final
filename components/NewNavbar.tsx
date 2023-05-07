@@ -2,7 +2,7 @@ import { signOut } from "firebase/auth";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase/firebase";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -41,7 +41,15 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [user] = useAuthState(auth);
   const router = useRouter();
-  const { setTheme, resolvedTheme, theme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
+
+  const [query, setQuery] = useState("");
+
+  function search(e: any) {
+    e.preventDefault();
+    setQuery(e.target.value);
+    console.log(auth);
+  }
 
   const logout = async () => {
     await signOut(auth);
@@ -58,13 +66,14 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
     });
     setIsOpen(!isOpen);
   };
+
   const handleNavigation = (data: any) => {
     router.push(`/${data.url}`);
     setIsOpen(!isOpen);
   };
 
   return (
-    <nav className="bg-white dark:bg-[#18191a] h-max flex items-center shadow justify-between flex-wrap fixed top-0 z-50 py-2 px-3 w-full">
+    <nav className="bg-white dark:bg-[#18191a] h-max flex items-center shadow justify-between flex-wrap fixed top-0 z-50 py-2 pl-3 pr-2 w-full">
       <div className="flex cursor-pointer" onClick={() => router.push("/")}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -87,14 +96,18 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
           className="flex items-center px-3 py-2 rounded text-black-500 hover:text-black-400"
         >
           <svg
-            className={`fill-current h-3 w-3 mr-3.5 ${isOpen ? "hidden" : "block"}`}
+            className={`fill-current h-3 w-3 mr-3.5 ${
+              isOpen ? "hidden" : "block"
+            }`}
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
           </svg>
           <svg
-            className={`fill-current h-3 w-3 mr-3.5 ${isOpen ? "block" : "hidden"}`}
+            className={`fill-current h-3 w-3 mr-3.5 ${
+              isOpen ? "block" : "hidden"
+            }`}
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -109,6 +122,15 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
       >
         {user && (
           <div className="text-sm lg:inline-flex sm:mt-2.5 ml-auto text-end">
+            <div className="relative bg-gray-100 dark:bg-gray-600 pt-[15px] mt-[-5px] mx-2 px-2 py-2 lg:w-[30%] lg:h-10 dark:text-gray-300 w-max pl-3 pr-3 rounded-full flex items-center justify-center ml-auto lg:mb-0 sm:mb-4 sm:h-7 sm:w-1/5">
+              <input
+                type="text"
+                placeholder="Search"
+                className="outline-none bg-transparent border-none mt-[-8px] sm:h-7 sm:w-full"
+                onChange={search}
+                value={query}
+              />
+            </div>
             <li
               onClick={handleChangePage}
               className="block text-white-200 mr-4 cursor-pointer mx-2"
@@ -119,35 +141,35 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
                   "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
                 }
                 alt="Profile picture"
-                className="w-8 h-8 rounded-full lg:mx-auto ml-auto"
+                className="w-8 h-8 sm:w-7 sm:h-7 rounded-full lg:mx-auto ml-auto"
               />
             </li>
 
             {topData.map((data, index) => (
               <li
-                className="block mt-3 lg:mt-0 text-white-200 mr-4 cursor-pointer mx-2"
+                className="block mt-3 lg:mt-0 sm:mt-2.5 text-white-200 mr-4 cursor-pointer mx-2"
                 key={index}
                 onClick={() => handleNavigation(data)}
               >
                 <img
                   src={data.image}
                   alt="Profile picture"
-                  className="w-8 h-8 rounded-full lg:mx-auto ml-auto"
+                  className="w-8 h-8 sm:w-7 sm:h-7 rounded-full lg:mx-auto ml-auto"
                 />
               </li>
             ))}
             <li
-              className="block mt-4 lg:mt-[2px] text-white-200 mr-4 cursor-pointer mx-2"
+              className="block mt-4 lg:mt-[2px] text-white-200 mr-3 cursor-pointer mx-2"
               onClick={() => logout()}
             >
               <img
                 src="https://i.postimg.cc/HkPFRrvg/image-2023-05-06-234001089-removebg-preview.png"
                 alt="Profile picture"
-                className="w-7 h-7 lg:mx-auto ml-auto "
+                className="w-7 h-7 lg:mx-auto ml-auto"
               />
             </li>
             {resolvedTheme === "dark" ? (
-              <li className="block mt-[22px] text-white-200 mr-5 cursor-pointer mx-2">
+              <li className="block mt-[22px] text-white-200 mr-[18px] cursor-pointer mx-2">
                 <motion.div
                   onClick={() =>
                     setTheme(resolvedTheme === "dark" ? "light" : "dark")
@@ -157,7 +179,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
                 </motion.div>
               </li>
             ) : (
-              <li className="block mt-[22px] text-white-200 mr-5 cursor-pointer mx-2">
+              <li className="block mt-[22px] text-white-200 mr-[18px] cursor-pointer mx-2">
                 <motion.div
                   onClick={() =>
                     setTheme(resolvedTheme === "dark" ? "light" : "dark")

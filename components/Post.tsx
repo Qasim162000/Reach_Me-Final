@@ -22,10 +22,6 @@ import { RiShareForwardLine } from "react-icons/ri";
 
 import { auth, firestore } from "../firebase/firebase";
 import DeleteIcon from "@mui/icons-material/Delete";
-// const reactionImages = ["https://i.postimg.cc/bNH29ypq/like.png"];
-
-// const seconReactionImage = ["https://i.postimg.cc/bNH29ypq/like.png"];
-
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
@@ -71,11 +67,6 @@ const Post: React.FC<PostProps> = ({
     setAnchorEl(null);
   };
 
-  /*   console.log(
-    likes.map((like) => like.data().username),
-    "💖💖"
-  ); */
-
   const getLikeName = () => {
     if (hasLikes) {
       setLikeName(likes.map((like) => like.data().username));
@@ -94,7 +85,7 @@ const Post: React.FC<PostProps> = ({
         timestamp: serverTimestamp(),
       });
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
 
     setComment("");
@@ -130,11 +121,6 @@ const Post: React.FC<PostProps> = ({
     getLikeName();
   }, [likes, firestore, hasLikes]);
 
-  // useEffect(() => {
-  //   setReactions(shuffle(reactionImages).pop());
-  //   // setSecondReactions(shuffle(seconReactionImage).pop());
-  // }, [likes]);
-
   const likePost = async () => {
     try {
       if (hasLikes) {
@@ -145,7 +131,7 @@ const Post: React.FC<PostProps> = ({
         });
       }
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
 
@@ -154,7 +140,6 @@ const Post: React.FC<PostProps> = ({
       router.push({
         pathname: `profile/${id}`,
         query: {
-          /*  userId: user?.uid, */
           userName: author.toString(),
         },
       });
@@ -208,7 +193,6 @@ const Post: React.FC<PostProps> = ({
           </div>
         </div>
         <div className="w-8 h-8 grid place-items-center text-xl text-black hover:bg-gray-200 dark:text-dark-txt dark:hover:bg-dark-third rounded-full cursor-pointer">
-          {/* <i className="bx bx-dots-horizontal-rounded">&hellip;</i> */}
           {user?.uid && (
             <>
               <IconButton
@@ -247,13 +231,6 @@ const Post: React.FC<PostProps> = ({
             </>
           )}
         </div>
-        {/* {
-          user?.uid && (
-            <button onClick={deletePost} className="delete-button">
-              <DeleteIcon />
-            </button>
-          )
-        } */}
       </div>
       {/* <!-- END POST AUTHOR --> */}
 
@@ -500,17 +477,6 @@ const Post: React.FC<PostProps> = ({
                         Post
                       </button>
                     )}
-                    {/* <div className="flex space-x-0 items-center justify-center">
-                      <span className="w-7 h-7 grid place-items-center rounded-full hover:bg-gray-200 cursor-pointer text-gray-500 dark:text-gray-300 dark:hover:bg-gray-800 text-xl">
-                        <EmojiEmotionsIcon />
-                      </span>
-                      <span className="w-7 h-7 grid place-items-center rounded-full hover:bg-gray-200 cursor-pointer text-gray-500 dark:text-gray-300 dark:hover:bg-gray-800 text-xl">
-                        <CameraAltIcon />
-                      </span>
-                      <span className="w-7 h-7 grid place-items-center rounded-full hover:bg-gray-200 cursor-pointer text-gray-500 dark:text-gray-300 dark:hover:bg-gray-800 text-xl">
-                        <FavoriteIcon />
-                      </span>
-                    </div> */}
                   </div>
                 </div>
               </div>
