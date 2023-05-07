@@ -122,7 +122,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
       >
         {user && (
           <div className="text-sm lg:inline-flex sm:mt-2.5 ml-auto text-end">
-            <div className="relative bg-gray-100 dark:bg-gray-600 pt-[15px] mt-[-5px] mx-2 px-2 py-2 lg:w-[30%] lg:h-10 dark:text-gray-300 w-max pl-3 pr-3 rounded-full flex items-center justify-center ml-auto lg:mb-0 sm:mb-4 sm:h-7 sm:w-1/5">
+            {/* <div className="relative bg-gray-100 dark:bg-gray-600 pt-[15px] mt-[-5px] mx-2 px-2 py-2 lg:w-[30%] lg:h-10 dark:text-gray-300 w-max pl-3 pr-3 rounded-full flex items-center justify-center ml-auto lg:mb-0 sm:mb-4 sm:h-7 sm:w-1/5">
               <input
                 type="text"
                 placeholder="Search"
@@ -130,7 +130,7 @@ const NewNavbar: React.FC<NewNavbarProps> = ({}) => {
                 onChange={search}
                 value={query}
               />
-            </div>
+            </div> */}
             <li
               onClick={handleChangePage}
               className="block text-white-200 mr-4 cursor-pointer mx-2"
