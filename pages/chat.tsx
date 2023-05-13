@@ -99,9 +99,11 @@ const Chat: React.FC<ChatProps> = () => {
                         ).fromNow()}
                       </span>
                     </div>
-                    <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
+                    <div className="">
                       <Image
                         className="rounded-full"
+                        width={50}
+                        height={50}
                         src={data.data().profileImage || DummyDisplayPic}
                         alt={data.data().username}
                       />
@@ -109,11 +111,11 @@ const Chat: React.FC<ChatProps> = () => {
                   </div>
                 ) : (
                   <div className="flex w-full mt-2 space-x-3 max-w-xs">
-                    <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
+                    <div>
                       <Image
                         className="rounded-full"
-                        width={100}
-                        height={100}
+                        width={50}
+                        height={50}
                         src={data.data().profileImage || DummyDisplayPic}
                         alt={data.data().username}
                       />
