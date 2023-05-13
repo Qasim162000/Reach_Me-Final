@@ -52,36 +52,37 @@ const EventItem: React.FC<EventItemProps> = ({
     <div className="flex flex-col xl:mx-4 mx-2 my-4">
       <div className="flex flex-col justify-between bg-white rounded-lg shadow-xl border-2">
         <Image src={image} alt={title} width="800" height="500" />
-        <div className="p-6">
+        <div className="p-6" style={{ minHeight: "250px" }}>
           <h3 className="text-xl font-semibold mb-2 text-black">{title}</h3>
           <p className="text-gray-700 text-lg mb-2">{description}</p>
-          <div className="flex justify-between items-center">
-            <p className="text-gray-600 text-xs">
-              <span className="font-bold">Organizers:</span> {organizers}
-            </p>
-            <p className="text-gray-600 text-xs">
-              <span className="font-bold">Place:</span> {place}
-            </p>
-          </div>
-          <div className="flex justify-between items-center mt-2">
-            <p className="text-gray-600 text-xs">
-              <span className="font-bold">Date:</span> {date}
-            </p>
-            <p className="text-gray-600 text-xs">
-              <span className="font-bold">Time:</span> {time}
-            </p>
-          </div>
-          {isAdmin && (
-            <div className="flex justify-center mt-6">
-              <button
-                className="bg-red-500 hover:bg-red-700 text-white font-bold h-9 w-20 rounded mt-2"
-                onClick={handleDelete}
-              >
-                Delete
-              </button>
-            </div>
-          )}
         </div>
+
+        <div className="flex justify-between items-center mx-2">
+          <p className="text-gray-600 text-xs">
+            <span className="font-bold">Organizers:</span> {organizers}
+          </p>
+          <p className="text-gray-600 text-xs">
+            <span className="font-bold">Place:</span> {place}
+          </p>
+        </div>
+        <div className="flex justify-between items-center m-2">
+          <p className="text-gray-600 text-xs">
+            <span className="font-bold">Date:</span> {date}
+          </p>
+          <p className="text-gray-600 text-xs">
+            <span className="font-bold">Time:</span> {time}
+          </p>
+        </div>
+        {isAdmin && (
+          <div className="flex justify-center mt-6">
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-bold h-9 w-20 rounded mt-2"
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

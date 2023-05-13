@@ -33,9 +33,7 @@ const Projects: React.FC<ProjectsProps> = ({}) => {
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const q = query(
-        collection(firestore, "projects")
-      );
+      const q = query(collection(firestore, "projects"));
       const querySnapshot = await getDocs(q);
       const projectsData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -71,7 +69,7 @@ const Projects: React.FC<ProjectsProps> = ({}) => {
             Loading...
           </div>
         ) : (
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mt-4 px-4 xl:ml-[200px]">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 mt-4 px-4 xl:ml-[200px]">
             {projects.length > 0 ? (
               projects.map((project) => (
                 <div
@@ -79,7 +77,7 @@ const Projects: React.FC<ProjectsProps> = ({}) => {
                   className="bg-white rounded-lg shadow-lg border-2 overflow-hidden"
                 >
                   <img
-                    className="h-auto w-auto object-cover"
+                    className="h-[500px] w-full object-cover"
                     src={project.gallery}
                     alt="Project gallery"
                   />
