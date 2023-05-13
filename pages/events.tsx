@@ -2,18 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import EventsContext from "../components/context/events/EventsContext";
 import EventItem from "../components/EventItem";
-import { app, auth } from "../firebase/firebase";
-import {
-  getFirestore,
-  collection,
-  query,
-  where,
-  getDocs,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
 import LeftMenu from "../components/LeftMenu";
+import { auth } from "../firebase/firebase";
 
 interface Event {
   id: string;
@@ -29,58 +19,35 @@ interface Event {
   onDelete: (id: string) => Promise<void>;
 }
 
-interface EventsProps {}
+interface EventsProps { }
 
-const Events: React.FC<EventsProps> = ({}) => {
-  const { event, setEvent } = useContext(EventsContext);
+const Events: React.FC<EventsProps> = ({ }) => {
+  const { event, deleteEvent } = useContext(EventsContext);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const [isAdmin, setIsAdmin] = useState(false);
 
   const superAdminEmail = "laybatehreemz@gmail.com";
 
-  const fetchUserEvents = async (userId: string) => {
-    const db = getFirestore(app);
-    const eventsRef = collection(db, "events");
-    const userEventsQuery = query(eventsRef, where("userId", "==", userId));
-    const querySnapshot = await getDocs(userEventsQuery);
-
-    const events: Event[] = [];
-    querySnapshot.forEach((doc) => {
-      events.push({ ...(doc.data() as Omit<Event, "id">), id: doc.id });
-    });
-
-    setEvent(events);
+  useEffect(() => {
     setLoading(false);
-  };
+  }, [event]);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        fetchUserEvents(user.uid);
-        if (user.email === superAdminEmail) {
-          setIsAdmin(true);
-        }
-      } else {
-        console.error("User not logged in. Please log in to view your events.");
-        setLoading(false);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user && user.email === superAdminEmail) {
+        setIsAdmin(true);
       }
     });
-
     return () => {
       unsubscribe();
     };
   }, []);
 
   const handleDelete = async (id: string) => {
-    try {
-      const eventsCollection = collection(getFirestore(app), "events");
-      await deleteDoc(doc(eventsCollection, id));
-      setEvent((prevEvents: Event[]) =>
-        prevEvents.filter((event: Event) => event.id !== id)
-      );
-    } catch (error) {
-      console.error("Error deleting event: ", error);
+    const response = await deleteEvent(id);
+    if (!response.success) {
+      console.error("Error deleting event: ", response.message);
     }
   };
 

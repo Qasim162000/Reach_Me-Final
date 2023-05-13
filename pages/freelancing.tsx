@@ -38,8 +38,7 @@ const Freelancing: React.FC<FreelancingProps> = ({}) => {
       const fetchUserProjects = () => {
         const projectsCollection = collection(firestore, "freelancingProjects");
         const userProjectsQuery = query(
-          projectsCollection,
-          where("userId", "==", user.uid)
+          projectsCollection
         );
         const unsubscribe = onSnapshot(userProjectsQuery, (querySnapshot) => {
           const fetchedProjects: Project[] = querySnapshot.docs.map(

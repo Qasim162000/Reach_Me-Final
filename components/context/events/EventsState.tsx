@@ -1,7 +1,6 @@
 import EventsContext from "./EventsContext";
 import { useState, useEffect } from "react";
-import { auth } from "../../../firebase/firebase";
-import { collection, addDoc, onSnapshot, query, where, doc, deleteDoc } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, doc, deleteDoc } from "firebase/firestore";
 import { firestore } from "../../../firebase/firebase";
 
 interface EventsStateProps {
@@ -11,10 +10,9 @@ interface EventsStateProps {
 const EventsState: React.FC<EventsStateProps> = (props) => {
   const [event, setEvent] = useState<any>([]);
 
-  const fetchUserEvents = async (userId: string) => {
+  const fetchAllEvents = () => {
     const eventsRef = collection(firestore, "events");
-    const userEventsQuery = query(eventsRef, where("userId", "==", userId));
-    const unsubscribe = onSnapshot(userEventsQuery, (querySnapshot) => {
+    const unsubscribe = onSnapshot(eventsRef, (querySnapshot) => {
       const events: any[] = [];
       querySnapshot.forEach((doc) => {
         events.push({ id: doc.id, ...doc.data() });
@@ -25,11 +23,7 @@ const EventsState: React.FC<EventsStateProps> = (props) => {
   };
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        return fetchUserEvents(user.uid);
-      }
-    });
+    const unsubscribe = fetchAllEvents();
     return () => {
       if (unsubscribe) {
         unsubscribe();
