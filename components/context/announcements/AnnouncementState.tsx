@@ -77,7 +77,6 @@ const AnnouncementState: React.FC<AnnouncementStateProps> = (props) => {
       collection(firestore, "announcements"),
       (snapshot) => {
         const fetchedAnnouncements = snapshot.docs.map((doc) => ({
-          id: doc.id,
           ...doc.data(),
         })) as Announcement[];
         setAnnouncement(fetchedAnnouncements);

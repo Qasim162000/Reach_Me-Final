@@ -34,8 +34,7 @@ const Projects: React.FC<ProjectsProps> = ({}) => {
   useEffect(() => {
     const fetchProjects = async () => {
       const q = query(
-        collection(firestore, "projects"),
-        where("userId", "==", user?.uid)
+        collection(firestore, "projects")
       );
       const querySnapshot = await getDocs(q);
       const projectsData = querySnapshot.docs.map((doc) => ({
