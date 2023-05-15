@@ -23,9 +23,9 @@ interface Project {
   gallery: string;
 }
 
-interface ProjectsProps {}
+interface ProjectsProps { }
 
-const Projects: React.FC<ProjectsProps> = ({}) => {
+const Projects: React.FC<ProjectsProps> = ({ }) => {
   const router = useRouter();
   const [user] = useAuthState(auth);
   const [projects, setProjects] = useState<Project[]>([]);
@@ -85,13 +85,22 @@ const Projects: React.FC<ProjectsProps> = ({}) => {
                     <h3 className="font-bold text-gray-800">{project.title}</h3>
                     <p className="text-gray-600">{project.description}</p>
                     {/* Render other project details as needed */}
-                    <button
+                    {/* <button
+                      onClick={() => deleteProject(project.id)}
+                      type="button"
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold w-20 h-8 rounded h-6 mt-2"
+                    >
+                      Delete
+                    </button> */}
+                    {project.userId ===  user?.uid && (
+                      <button
                       onClick={() => deleteProject(project.id)}
                       type="button"
                       className="bg-red-500 hover:bg-red-700 text-white font-bold w-20 h-8 rounded h-6 mt-2"
                     >
                       Delete
                     </button>
+                    )}
                   </div>
                 </div>
               ))

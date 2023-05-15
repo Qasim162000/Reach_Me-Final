@@ -84,7 +84,7 @@ const Freelancing: React.FC<FreelancingProps> = ({}) => {
           </div>
         ) : projects.length > 0 ? (
           <div className="grid gap-4 grid-cols-1 md:grid-cols-2 mt-4 px-4 xl:ml-[200px]">
-            {projects?.map((item: any, index: any) => {
+              {projects?.map((item: any, index: any) => {
               return (
                 <FreelancingItem
                   key={index}
@@ -93,7 +93,8 @@ const Freelancing: React.FC<FreelancingProps> = ({}) => {
                   title={item.title}
                   description={item.description}
                   email={item.email}
-                  user={item.user}
+                  userId={item.userId}
+                  currentUserId={user?.uid} // Add this
                   onDelete={() => deleteProject(item.id)}
                 />
               );
