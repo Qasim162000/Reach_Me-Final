@@ -6,11 +6,13 @@ interface FreelancingItemProps {
   title: any;
   description: any;
   email: any;
-  user: any;
+  userId: any;
+  currentUserId: any;  // Add this
   onDelete: () => void;
 }
 
 const FreelancingItem: React.FC<FreelancingItemProps> = (props) => {
+  console.log(props);
   return (
     <div className="flex flex-col w-[90%] my-4 px-10 py-6 bg-white rounded-lg shadow-lg border-2 text-center mx-auto justify-between">
       <div className="flex-col justify-between items-center">
@@ -32,12 +34,14 @@ const FreelancingItem: React.FC<FreelancingItemProps> = (props) => {
         >
           {props.email}
         </a>
-        <button
-          onClick={props.onDelete}
-          className="bg-red-500 hover:bg-red-700 text-white font-bold w-[70px] h-[32px] rounded mx-auto"
-        >
-          Delete
-        </button>
+        {props.userId === props.currentUserId && (
+          <button
+            onClick={props.onDelete}
+            className="bg-red-500 hover:bg-red-700 text-white font-bold w-[70px] h-[32px] rounded mx-auto"
+          >
+            Delete
+          </button>
+        )}
       </div>
     </div>
   );
