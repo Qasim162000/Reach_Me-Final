@@ -1,4 +1,5 @@
 import React from "react";
+import { WhatsappShareButton, WhatsappIcon } from "react-share";
 
 interface FreelancingItemProps {
   date: any;
@@ -7,12 +8,11 @@ interface FreelancingItemProps {
   description: any;
   email: any;
   userId: any;
-  currentUserId: any;  // Add this
+  currentUserId: any; // Add this
   onDelete: () => void;
 }
 
 const FreelancingItem: React.FC<FreelancingItemProps> = (props) => {
-  console.log(props);
   return (
     <div className="flex flex-col w-[90%] my-4 px-10 py-6 bg-white rounded-lg shadow-lg border-2 text-center mx-auto justify-between">
       <div className="flex-col justify-between items-center">
@@ -34,14 +34,22 @@ const FreelancingItem: React.FC<FreelancingItemProps> = (props) => {
         >
           {props.email}
         </a>
-        {props.userId === props.currentUserId && (
-          <button
-            onClick={props.onDelete}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold w-[70px] h-[32px] rounded mx-auto"
+        <div className="flex justify-center items-center">
+          {props.userId === props.currentUserId && (
+            <button
+              onClick={props.onDelete}
+              className="bg-red-500 hover:bg-red-700 text-white font-bold w-[70px] h-[32px] rounded mx-auto"
+            >
+              Delete
+            </button>
+          )}
+          <WhatsappShareButton
+            url=" "
+            title={`Deadline: ${props.date}\nNiche: ${props.niche}\nEmail: ${props.email}\nProject: ${props.title}\nDescription: ${props.description}`}
           >
-            Delete
-          </button>
-        )}
+            <WhatsappIcon className="rounded-full w-10 h-10 mx-1" />
+          </WhatsappShareButton>
+        </div>
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import {
 import { firestore, auth } from "../firebase/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LeftMenu from "../components/LeftMenu";
+import { WhatsappShareButton, WhatsappIcon } from "react-share";
 
 interface Project {
   id: string;
@@ -23,9 +24,9 @@ interface Project {
   gallery: string;
 }
 
-interface ProjectsProps { }
+interface ProjectsProps {}
 
-const Projects: React.FC<ProjectsProps> = ({ }) => {
+const Projects: React.FC<ProjectsProps> = ({}) => {
   const router = useRouter();
   const [user] = useAuthState(auth);
   const [projects, setProjects] = useState<Project[]>([]);
@@ -84,23 +85,25 @@ const Projects: React.FC<ProjectsProps> = ({ }) => {
                   <div className="p-4">
                     <h3 className="font-bold text-gray-800">{project.title}</h3>
                     <p className="text-gray-600">{project.description}</p>
-                    {/* Render other project details as needed */}
-                    {/* <button
-                      onClick={() => deleteProject(project.id)}
-                      type="button"
-                      className="bg-red-500 hover:bg-red-700 text-white font-bold w-20 h-8 rounded h-6 mt-2"
-                    >
-                      Delete
-                    </button> */}
-                    {project.userId ===  user?.uid && (
-                      <button
-                      onClick={() => deleteProject(project.id)}
-                      type="button"
-                      className="bg-red-500 hover:bg-red-700 text-white font-bold w-20 h-8 rounded h-6 mt-2"
-                    >
-                      Delete
-                    </button>
-                    )}
+
+                    <div className="flex justify-center items-center">
+                      {project.userId === user?.uid && (
+                        <button
+                          onClick={() => deleteProject(project.id)}
+                          type="button"
+                          className="bg-red-500 hover:bg-red-700 text-white font-bold w-20 h-8 rounded h-6 mt-2 mr-2"
+                        >
+                          Delete
+                        </button>
+                      )}
+
+                      <WhatsappShareButton
+                        url=" "
+                        title={`${project.gallery}\nProject Title: ${project.title}\nProject Description: ${project.description}`}
+                      >
+                        <WhatsappIcon className="rounded-full w-10 h-10 mx-1 mt-2" />
+                      </WhatsappShareButton>
+                    </div>
                   </div>
                 </div>
               ))

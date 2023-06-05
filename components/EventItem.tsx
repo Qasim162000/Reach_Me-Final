@@ -5,6 +5,7 @@ import EventsContext from "./context/events/EventsContext";
 import { auth } from "../firebase/firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 import { firestore } from "../firebase/firebase";
+import { WhatsappShareButton, WhatsappIcon } from "react-share";
 
 const superAdminEmail = "laybatehreemz@gmail.com";
 
@@ -73,16 +74,24 @@ const EventItem: React.FC<EventItemProps> = ({
             <span className="font-bold">Time:</span> {time}
           </p>
         </div>
-        {isAdmin && (
-          <div className="flex justify-center mt-6">
-            <button
-              className="bg-red-500 hover:bg-red-700 text-white font-bold h-9 w-20 rounded mt-2"
-              onClick={handleDelete}
-            >
-              Delete
-            </button>
-          </div>
-        )}
+        <div className="flex justify-center items-center my-3">
+          {isAdmin && (
+            <div className="flex justify-center">
+              <button
+                className="bg-red-500 hover:bg-red-700 text-white font-bold h-9 w-20 rounded mt-2"
+                onClick={handleDelete}
+              >
+                Delete
+              </button>
+            </div>
+          )}
+          <WhatsappShareButton
+            url=" "
+            title={`${image}\nOrganizers: ${organizers}\nPlace: ${place}\nDate & Time: ${date} | ${time}\nEvent: ${title}\nEvent Info: ${description}`}
+          >
+            <WhatsappIcon className="rounded-full w-10 h-10 mx-1 mt-2" />
+          </WhatsappShareButton>
+        </div>
       </div>
     </div>
   );
